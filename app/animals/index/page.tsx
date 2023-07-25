@@ -1,9 +1,16 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import AnimalService from "../../services/animalService";
+import AnimalService from "../../../services/animalService";
 import AnimalsList from "../components/AnimalsList";
-import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import SpinnerLoading from "../../components/SpinnerLoading";
+import 'react-toastify/dist/ReactToastify.css';
+import ButtonsBar from "../../components/ButtonsBar";
 
+type ButtonsObject = {
+    description: string
+    url: string
+}
 export default function Index() {
 
     const [listIndex, setListIndex] = useState([])
@@ -11,26 +18,25 @@ export default function Index() {
 
     useEffect(() => {
         _animalService.index()
-            .then((response) => {
-                if (!response.ok) {           
-                  throw new Error(response.statusText);
-                }
-                return response.json();
-            })
             .then((data) => {
-                setListIndex(data.listActive)
-            }).catch(error => {
-                toast.error(error.message, {
-                    position: toast.POSITION.TOP_CENTER,
-                    autoClose: 3000,
-                  });
+                data && setListIndex(data.listActive)
             })
     }, [])
 
+    const buttons: ButtonsObject[] = [
+        {description: 'Registrar animal', url: "/animals/register"}
+    ]
 
     return (
-        <>
-            <AnimalsList list={listIndex} title="Listado de animales activos" />
+        <>  
+            <ButtonsBar buttons={buttons} />
+            { listIndex.length > 0 ?
+                <AnimalsList list={listIndex} title="Listado de animales activos" />
+                :
+                <><SpinnerLoading/>
+                <ToastContainer/>
+                </>
+            }           
         </>
       );
 }

@@ -24,7 +24,6 @@ const ToastMessages = ({ errorMessage = '', successMessage = '', resetMessages }
 
   useEffect(() => {
     if (successMessage && successMessage != '') {
-      console.log("tst2222");
       toast.success(successMessage, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,

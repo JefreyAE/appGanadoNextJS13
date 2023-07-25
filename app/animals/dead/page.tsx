@@ -1,35 +1,39 @@
 'use client'
 import { useEffect, useState } from "react";
 import AnimalsList from "../components/AnimalsList";
-import AnimalService from "../../services/animalService";
+import AnimalService from "../../../services/animalService";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import SpinnerLoading from "../../components/SpinnerLoading";
+import ButtonsBar from "../../components/ButtonsBar";
 
+type ButtonsObject = {
+    description: string
+    url: string
+}
 export default function Dead() {
     const [listDead, setList] = useState([]);
     let _animalService = new AnimalService();
 
     useEffect(() => {
         _animalService.dead()
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(response.statusText);
-                }
-                return response.json();
-            })
             .then((data) => {
                 setList(data.listDead);
             })
-            .catch((error) => {
-                toast.error(error.message, {
-                    position: toast.POSITION.TOP_CENTER,
-                    autoClose: 3000,
-                });
-            });
     }, []);
+
+    const buttons: ButtonsObject[] = [
+        {description: 'Registrar animal', url: "/animals/register"}
+    ]
+    
     return (
-        <>        
-            <AnimalsList title="Listado de animales fallecidos" list={listDead} />
+        <>
+            <ButtonsBar buttons={buttons} />
+            {listDead.length >= 0 ?
+                <AnimalsList title="Listado de animales fallecidos" list={listDead} />
+                :
+                <SpinnerLoading />
+            }
             <ToastContainer />
         </>
 

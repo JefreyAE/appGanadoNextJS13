@@ -1,8 +1,16 @@
 'use client'
-import React, { useState, useEffect } from "react";
-import AnimalService from "../../services/animalService";
-import AnimalsList from "../components/AnimalsList";
+import React, { useState, useEffect } from "react"
+import AnimalService from "../../../services/animalService"
+import AnimalsList from "../components/AnimalsList"
+import { ToastContainer, toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css'
+import SpinnerLoading from "../../components/SpinnerLoading"
+import ButtonsBar from "../../components/ButtonsBar"
 
+type ButtonsObject = {
+  description: string
+  url: string
+}
 export default function All() {
 
   const [listAll, setList] = useState([]);
@@ -10,25 +18,27 @@ export default function All() {
 
   useEffect(() => {
     _animalService.indexAll()
-      .then((res: any) => res.json())
       .then((data: any) => {
-        setList(data.listAll);
+        data && setList(data.listAll);
       })
-      .catch((error: any) => {
-        console.log(error); // me muestra el contenido de la respuesta con error
-      });
   }, []);
 
-  // if (listAll.length >= 1) {
-    return (
-      listAll && <AnimalsList list={listAll} title={"Listado de todos los animales"}></AnimalsList>
-    );
-  // } else {
-  //   return (
-  //     <h1 className="loading">Cargando...</h1>
-  //   );
-  // }
+  const buttons: ButtonsObject[] = [
+      {description: 'Registrar animal', url: "/animals/register"}
+  ]
+
+  return (
+    <>
+      <ButtonsBar buttons={buttons} />
+      {listAll.length >= 0 ?
+        <AnimalsList list={listAll} title={"Listado de todos los animales"}></AnimalsList>
+        :
+        <SpinnerLoading />
+      }
+
+      <ToastContainer />
+    </>
+  );
+
 
 }
-
-//All.Auth = WithPrivateRoute

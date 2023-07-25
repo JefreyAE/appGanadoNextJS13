@@ -1,16 +1,14 @@
-'use client'
+
 import React from "react";
-import Container from "../layouts/containerComponent/containerComponent";
-import Navbar from "../layouts/navbarComponent/Navbar";
-import WithPrivateRoute from "../auth/WithPrivateRoute";
+import WithPrivateRoute from "../../auth/WithPrivateRoute";
+import PagesContainer from "../layouts/containersComponent/PagesContainer";
 
 export default function MainLayout({children}:{children:React.ReactNode}){
     return(
         <WithPrivateRoute>
-            <Navbar />
-            <Container>
+            <PagesContainer>
                 {children}
-            </Container>
+            </PagesContainer>
         </WithPrivateRoute>    
     )
 }

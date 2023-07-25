@@ -1,31 +1,25 @@
-import { useEffect, useState } from "react";
-import Constants from "../../helpers/constants";
+'use client'
 import React from "react";
-import Link from "next/link";
 import ImgCarousel from "./ImgCarousel"
 
 interface Image {
     animal_id: number,
     title: string,
     description: string,
-    image_name: string
+    image_name: string,
+    user_id: number
 }
 
-export default function Carousel(props: any) {
-    let [contador, setContador] = useState(-1);
-    const [listImages, setList] = useState([]);
+interface CarouselProps {
+    listImages: any
+    delete_image?: (image_name: string, animal_id: number, user_id: number) => void | null
+}
 
-    let constants = new Constants();
-
-    useEffect(() => {
-        setList(props.imagesList);
-    });
-
+export default function Carousel({ listImages, delete_image }: CarouselProps) {
     return (
-
         <div id="carouselExampleCaptions" className="rounded carousel slide" data-ride="carousel">
             <ol className="carousel-indicators">
-                {listImages.map((image, index) => {
+                {listImages && listImages.map((image: any, index: any) => {
                     return (
                         <React.Fragment key={index}>
                             {index === 0 &&
@@ -40,17 +34,17 @@ export default function Carousel(props: any) {
                 )}
             </ol>
             <div className="carousel-inner">
-                {listImages.map((image: Image, index) => {
+                {listImages && listImages.map((image: Image, index: any) => {
                     return (
                         <React.Fragment key={index} >
                             {index === 0 &&
                                 <div className="carousel-item active" key={index} >
-                                    <ImgCarousel apiUrl={constants.getUrlApi()} image={image} />
+                                    {image && <ImgCarousel image={image} delete_image={delete_image} />}
                                 </div>
                             }
                             {index !== 0 &&
-                                <div className="carousel-item" key={index} >
-                                    <ImgCarousel apiUrl={constants.getUrlApi()} image={image} />
+                                <div className="carousel-item " key={index} >
+                                    {image && <ImgCarousel image={image} delete_image={delete_image} />}
                                 </div>
                             }
                         </React.Fragment>
@@ -66,6 +60,7 @@ export default function Carousel(props: any) {
                 <span className="carousel-control-next-icon" aria-hidden="true"></span>
                 <span className="sr-only">Next</span>
             </a>
+
 
         </div>
     )

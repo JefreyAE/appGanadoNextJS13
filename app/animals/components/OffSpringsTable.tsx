@@ -1,4 +1,4 @@
-import Animal from "../../models/animal"
+import Animal from "../../../models/animal"
 
 interface OffSpringsProps {
     offSprings: Animal[],
@@ -30,10 +30,10 @@ export default function OffSpringsTable({ offSprings, animal }: OffSpringsProps)
                     <tbody>
                         {offSprings && offSprings.map((animalOff, index) => (
                             <tr key={index}>
-                                <td>{animalOff.nickname}</td>
-                                <td className="registration-number">{animalOff.registration_number}</td>
-                                <td>{animalOff.code}</td>
-                                <td>{animalOff.birth_date.split(" ")[0]}</td>
+                                <td>{animalOff.nickname && animalOff.nickname}</td>
+                                <td className="registration-number">{animalOff.registration_number && animalOff.registration_number}</td>
+                                <td>{animalOff.code && animalOff.code}</td>
+                                <td>{animalOff.birth_date && animalOff.birth_date.split(" ")[0]}</td>
                                 <td>{animalOff.sex}</td>
                                 <td>{animalOff.animal_state}</td>
                                 {animal && animal.sex !== 'Macho' &&

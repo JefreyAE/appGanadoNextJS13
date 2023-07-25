@@ -1,14 +1,12 @@
-import React, { Component } from "react";
 
-class Footer extends Component{
-
-    render(){
-        return(
+function Footer() {
+    return (
+        <footer id="footer" className="col-md-12">
             <div id="#container_footer" className="wrap row">
-                <div id="developer" className="col-md-12">Desarrollado por JAE &copy 2021</div>
+                <div id="developer" className="col-md-12">Desarrollado por JAE {'\u00a9'} 2023</div>
             </div>
-        );
-    }
+        </footer>
+    );
 }
 
 export default Footer;

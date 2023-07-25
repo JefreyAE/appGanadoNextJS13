@@ -1,12 +1,13 @@
 import React from "react";
-import LoginComponent from "./LoginComponent";
+import Login from "./components/Login";
 import Title from "../layouts/titleComponent/Title";
+import WithPrivateRoute from "../../auth/WithPrivateRoute";
 
 export default function LoginLayout({children}: {children: React.ReactNode}){
     return(       
-        <React.Fragment>
+        <>
             <Title/>
-            <LoginComponent/>
-        </React.Fragment>    
+            <Login/>
+        </>    
     )
 }

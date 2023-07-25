@@ -7,7 +7,7 @@ export default function Title () {
         <div className=" justify-content-center">
             <div id="companyName" className="mb-3">
                 <h1>
-                    <a href="#">Sistema de Registro Ganadero</a>
+                    <a className='page-title' href="#">Sistema de Registro Ganadero</a>
                 </h1>
             </div> 
         </div>

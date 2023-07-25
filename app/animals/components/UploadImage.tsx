@@ -1,57 +1,36 @@
 'use client'
-import { useEffect, useState } from "react";
-import AnimalService from "../../services/animalService";
+import AnimalService from "../../../services/animalService";
 import React from "react";
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function UploadImage(props:any) {
-    //const [animal_id = setAnimalId] = useState();
-    const { animal_id } = props.animal_id;
-    const [id, setId] = useState(0);
-    const [message, setMessage] = useState();
+export default function UploadImage(props: any) {
 
     let _animalService = new AnimalService();
-    let result:any = "";
 
-    useEffect(() => {
-        setId(animal_id);
-    });
-
-    let uploadImageSub = (e:any) => {
+    let uploadImageSub = (e: any) => {
         e.preventDefault();
         var uploadImagex = document.getElementById('uploadImage') as HTMLFormElement;;
 
         var cargando = document.getElementById("cargando");
-        if (cargando != null){
+        if (cargando != null) {
             cargando.style.display = 'block';
-        
-        
-            if (uploadImagex != null){
-                let dt = new FormData(uploadImagex);
 
-                _animalService.uploadImage(dt).then(
-                    (res:any) => {
-                        if (cargando != null){
+            if (uploadImagex != null) {
+                let dt = new FormData(uploadImagex);           
+                _animalService.uploadImage(dt)
+                    .finally(() => {
+                        if (cargando != null) {
                             cargando.style.display = 'none';
                         }
-                        result = res.data.message;
-                        setMessage(result);
-                    }).catch((err:any) => {
-                        console.log(err);
-                    }).finally(() => {
-                        if (cargando != null){
-                            cargando.style.display = 'none';
-                        }
-                    });;
-
-                alert(message);
-                window.location.href = window.location.href;
+                        props.imageUploaded();
+                    });             
             }
         }
     }
 
-    let showUploadForm = (e:any)=>{
+    let showUploadForm = (e: any) => {
         let colapse = document.getElementById('collapseOne');
-        colapse ? colapse.style.display === 'block' ?   colapse.style.display = 'none' : colapse.style.display = 'block' : '';
+        colapse ? colapse.style.display === 'block' ? colapse.style.display = 'none' : colapse.style.display = 'block' : '';
     }
 
     return (
@@ -60,7 +39,7 @@ export default function UploadImage(props:any) {
                 <div className="card">
                     <div className="card-header" id="headingOne">
                         <h2 className="mb-0">
-                            <button className="btn btn-link btn-block text-left" onClick={ e => showUploadForm(e)} formMethod="POST" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button className="btn btn-link btn-block text-left" onClick={e => showUploadForm(e)} formMethod="POST" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 Agregar una nueva imagen
                             </button>
                         </h2>
@@ -79,7 +58,7 @@ export default function UploadImage(props:any) {
                                 <div className="mb-2">
                                     <label className="form-label" htmlFor="file0">Selecciona una imagen:</label>
                                     <input type="file" className="form-control" name="file0" id="file0" required />
-                                    <input type="hidden" name="animal_id" id="animal_id" value={id || ''} />
+                                    <input type="hidden" name="animal_id" id="animal_id" value={props.animal_id || ''} />
                                     <input className="btn btn-success" type="submit" value="Subir imagen" />
                                 </div>
                                 <div id="cargando" style={{ display: 'none' }}>
@@ -95,7 +74,6 @@ export default function UploadImage(props:any) {
                     </div>
                 </div>
             </div>
-
         </React.Fragment>
     )
 }

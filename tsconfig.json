@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/login/page.tsx", "app/login/LoginComponent.tsx", "app/models/animal.ts","app/services/animalService.ts", "app/animals/components/AnimalDetail.tsx", "app/animals/layout.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/login/page.tsx", "app/login/components/Login.tsx", "models/animal.ts","services/animalService.ts","services/loginService.ts", "app/animals/components/AnimalDetail.tsx", "app/animals/layout.tsx", "app/animals/components/UploadImage.tsx"],
   "exclude": ["node_modules"]
 }

@@ -1,48 +1,49 @@
 'use client'
-import AnimalService from "../../services/animalService";
-import { useState } from "react";
-import React from "react";
-import AnimalForm from './AnimalForm'
-import Animal from "../../models/animal";
-import { ToastContainer, toast } from 'react-toastify';
+import AnimalService from "../../../services/animalService";
+import React, { useState } from "react";
+import Animal from "../../../models/animal";
+import { toast } from 'react-toastify';
+import AnimalFormSection from "./formComponents/AnimalFormSection";
+import { useRouter } from "next/navigation";
 
 interface AnimalDetailInterface{
     animal: Animal,
     animals: Animal[]
 }
-export default function AnimalDetail(props:AnimalDetailInterface) {
+export default function AnimalDetail({animal, animals}:AnimalDetailInterface) {
 
-    let _animalService = new AnimalService();
+    const _animalService = new AnimalService();
 
-    let update = (animal:Animal) => {
-        _animalService.update(animal)
-            .then((response) => {
-                if (!response.ok) {           
-                  throw new Error(response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.status) {
-                    if(data.status === 'success'){        
-                        toast.success(data.message, {
-                            position: toast.POSITION.TOP_CENTER,
-                            autoClose: 3000,
-                          });
-                    }
-                    if(data.status === 'error'){
-                        toast.error(data.message, {
-                            position: toast.POSITION.TOP_CENTER,
-                            autoClose: 3000,
-                          });
-                    }
-                }
-            }).catch(error => {
-                toast.error(error.message, {
-                    position: toast.POSITION.TOP_CENTER,
-                    autoClose: 3000,
-                  });
+    const [animalForm, setAnimalForm] = useState<Animal | undefined>()
+    const [isValidAnimalForm, setIsValidAnimalForm] = useState(true)
+    const router = useRouter()
+
+    const getAnimalFormData = (callback: ()=>Animal) => {       
+        setAnimalForm(callback());
+    }
+
+    const animalValidationForm = (callback: ()=>boolean) => {
+        setIsValidAnimalForm(callback())
+    }
+
+    const update = (e:any) => {
+        e.preventDefault();
+        if (isValidAnimalForm) {
+            animalForm && _animalService.update(animalForm);
+        }else{
+            toast.error("Debes corregir los datos", {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 3000,
             });
+        }
+    }
+
+    const deleteAnimal = (e:any) => {
+        e.preventDefault()
+        _animalService.delete(animal.id)
+            .finally(() => {
+                router.push('/animals/index');
+            })
     }
 
     return (
@@ -50,7 +51,17 @@ export default function AnimalDetail(props:AnimalDetailInterface) {
             <h1 className="titulo col-md-12">Detalles del animal</h1>
             <div className="form col-lg-8" id='formDetailAnimal'>
                 <h2 className="titulo-2">Información general</h2>
-                <AnimalForm animal={props.animal} animals={props.animals} propFunction={update} propAction={'update'}/>    
+                <form id="form-detail-update" onSubmit={update} className="form_data form-group row">
+                    <AnimalFormSection
+                        animal={animal}
+                        animals={animals}
+                        getAnimalFormData={getAnimalFormData}
+                        action={'update'}
+                        animalValidationForm={animalValidationForm}
+                        isFormDisabled={true}
+                        deleteAnimal={deleteAnimal}
+                    />
+                </form>
             </div>
         </section>
     );
