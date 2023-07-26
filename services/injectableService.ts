@@ -8,13 +8,12 @@ import { getCookie } from 'cookies-next';
 export default class InjectablesService{
     private constants: Constants;
     private customFetch: CustomFetch;
-    private url: string;
+    private url: string | undefined;
     private token: string | null;
 
     constructor(){
         this.constants = new Constants();
         this.customFetch = new CustomFetch();
-        this.url = this.constants.getUrlApi();
         this.url = this.constants.getUrlApi();
         this.token = `${getCookie('token')}`; 
     }

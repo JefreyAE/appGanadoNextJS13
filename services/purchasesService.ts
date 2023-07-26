@@ -8,7 +8,7 @@ import { getCookie } from 'cookies-next';
 export default class PurchasesService{
     private constants: Constants;
     private customFetch: CustomFetch;
-    private url: string;
+    private url: string | undefined;
     private token: string | null;
 
     constructor(){

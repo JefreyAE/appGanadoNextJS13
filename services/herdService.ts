@@ -10,7 +10,7 @@ export default class HerdService{
 
     private constants: Constants;
     private customFetch: CustomFetch;
-    private url: string;
+    private url: string | undefined;
     private token: string | null ;
 
     constructor(){

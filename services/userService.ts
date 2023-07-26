@@ -8,7 +8,7 @@ import { checkAuth } from "../helpers/checkAuth";
 export default class UserService {
     private constants = new Constants();
     private customFetch = new CustomFetch();
-    private url: string;
+    private url: string | undefined;
     private token: string;
 
     constructor(){
