@@ -38,7 +38,6 @@ export default class CustomFetch{
 
         let requestOptions = {    
           method: 'GET',
-          mode: 'cors',
           headers: {...headerOptions},
           ...options
         };
