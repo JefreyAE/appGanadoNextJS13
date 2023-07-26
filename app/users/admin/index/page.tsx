@@ -2,10 +2,8 @@
 import React, { useEffect, useState } from "react";
 import UsersList from "../../components/UsersList";
 import { ToastContainer } from "react-toastify";
-import SpinnerLoading from "../../../components/SpinnerLoading";
 import 'react-toastify/dist/ReactToastify.css';
 import UserService from "../../../../services/userService";
-import Link from "next/link";
 import ButtonsBar from "../../../components/ButtonsBar";
 import useAdminAuthorization from "../../../../hooks/useAdminAuthorization";
 
@@ -16,7 +14,7 @@ type ButtonsObject = {
 
 export default function Index() {
 
-    const [listIndex, setListIndex] = useState([])
+    const [listIndex, setListIndex] = useState<[]>()
     const _userService = new UserService()
     const [updateList, setUpdateList] = useState(true)
     useAdminAuthorization(true)
@@ -43,13 +41,12 @@ export default function Index() {
 
     return (
         <>  
-            { listIndex.length > 0 ?
+            { listIndex &&
                 (<>
                     <ButtonsBar buttons={buttons} />
                     <UsersList list={listIndex} title="Lista de usuarios registrados" deleteUser={deleteUser}/>   
                 </>)
-                :
-                <><SpinnerLoading/></>
+
             } 
             <ToastContainer/>          
         </>

@@ -13,7 +13,7 @@ type ButtonsObject = {
 }
 export default function Index() {
 
-    const [listIndex, setListIndex] = useState([])
+    const [listIndex, setListIndex] = useState<[]>()
     const _animalService = new AnimalService()
 
     useEffect(() => {
@@ -30,13 +30,7 @@ export default function Index() {
     return (
         <>  
             <ButtonsBar buttons={buttons} />
-            { listIndex.length > 0 ?
-                <AnimalsList list={listIndex} title="Listado de animales activos" />
-                :
-                <><SpinnerLoading/>
-                <ToastContainer/>
-                </>
-            }           
+            { listIndex && <AnimalsList list={listIndex} title="Listado de animales activos" /> }           
         </>
       );
 }

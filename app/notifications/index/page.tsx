@@ -9,7 +9,7 @@ import ButtonsBar from "../../components/ButtonsBar";
 
 export default function Index() {
 
-    const [listIndex, setListIndex] = useState([])
+    const [listIndex, setListIndex] = useState<[]>()
     const _notificationService = new NotificationsService()
     const [isUpdated, setIsUpdated] = useState(false)
 
@@ -25,14 +25,9 @@ export default function Index() {
     }
 
     return (
-        <>  <ButtonsBar/>
-            { listIndex.length > 0 ?
-                listIndex && <NotificationsList reload={reload} list={listIndex} title="Listado de notificaciones activas" />
-                :<>
-                <SpinnerLoading/>
-                <ToastContainer/>
-                </>
-            }           
+        <>  
+            <ButtonsBar/>
+            { listIndex && <NotificationsList reload={reload} list={listIndex} title="Listado de notificaciones activas" /> }           
         </>
       );
 }

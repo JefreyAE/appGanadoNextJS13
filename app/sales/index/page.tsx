@@ -47,12 +47,7 @@ export default function Index(){
     return(
         <>
             <ButtonsBar buttons={buttons} />
-            { listIndex.length > 0 ?
-                listIndex && <TradesList title="Listado de ventas" tradeType={"sale"} tradesList={listIndex}/>
-                :<>
-                <SpinnerLoading/>
-                </>
-            }   
+            { listIndex && <TradesList title="Listado de ventas" tradeType={"sale"} tradesList={listIndex}/>}   
             <ToastContainer />
         </>
     )

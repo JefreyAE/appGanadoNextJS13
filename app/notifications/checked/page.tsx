@@ -9,7 +9,7 @@ import ButtonsBar from "../../components/ButtonsBar";
 
 export default function IndexAll() {
 
-    const [list, setListIndex] = useState([])
+    const [listIndex, setListIndex] = useState([])
     const _animalService = new NotificationsService()
 
     useEffect(() => {
@@ -22,13 +22,8 @@ export default function IndexAll() {
 
     return (
         <>  <ButtonsBar />
-            { list && list.length >= 0 ?
-                list && <NotificationsList list={list} title="Listado de todas las notificaciones vistas" />
-                :<>
-                <SpinnerLoading/>
-                <ToastContainer/>
-                </>
-            }           
+            { listIndex && <NotificationsList list={listIndex} title="Listado de todas las notificaciones vistas" />}      
+            <ToastContainer/>     
         </>
       );
 }

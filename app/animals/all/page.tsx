@@ -13,7 +13,7 @@ type ButtonsObject = {
 }
 export default function All() {
 
-  const [listAll, setList] = useState([]);
+  const [listAll, setList] = useState<[]>();
   let _animalService = new AnimalService();
 
   useEffect(() => {
@@ -30,11 +30,7 @@ export default function All() {
   return (
     <>
       <ButtonsBar buttons={buttons} />
-      {listAll.length >= 0 ?
-        <AnimalsList list={listAll} title={"Listado de todos los animales"}></AnimalsList>
-        :
-        <SpinnerLoading />
-      }
+      {listAll &&  <AnimalsList list={listAll} title={"Listado de todos los animales"}></AnimalsList>}
 
       <ToastContainer />
     </>

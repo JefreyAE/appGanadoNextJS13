@@ -16,7 +16,7 @@ export default function Index() {
 
     const _injectablesService = new InjectablesService()
 
-    const [listIndex, setListIndex] = useState([])
+    const [listIndex, setListIndex] = useState<[]>()
     const [updateList, setUpdateList] = useState(true)
 
     useEffect(() => {
@@ -43,13 +43,7 @@ export default function Index() {
     return (
         <>  
             <ButtonsBar buttons={buttons} />
-            {listIndex.length > 0 ?
-                <InjectablesList injectables={listIndex} deleteInjectable={delete_injectable} />
-                :
-                <><SpinnerLoading />
-                    <ToastContainer />
-                </>
-            }
+            {listIndex && <InjectablesList injectables={listIndex} deleteInjectable={delete_injectable} /> }
         </>
     );
 

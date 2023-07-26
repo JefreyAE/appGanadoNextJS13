@@ -12,7 +12,7 @@ type ButtonsObject = {
     url: string
 }
 export default function Dead() {
-    const [listDead, setList] = useState([]);
+    const [listDead, setList] = useState<[]>();
     let _animalService = new AnimalService();
 
     useEffect(() => {
@@ -29,11 +29,7 @@ export default function Dead() {
     return (
         <>
             <ButtonsBar buttons={buttons} />
-            {listDead.length >= 0 ?
-                <AnimalsList title="Listado de animales fallecidos" list={listDead} />
-                :
-                <SpinnerLoading />
-            }
+            {listDead && <AnimalsList title="Listado de animales fallecidos" list={listDead} /> }
             <ToastContainer />
         </>
 

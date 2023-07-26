@@ -14,7 +14,7 @@ type ButtonsObject = {
 
 export default function Index() {
 
-    const [listIndex, setListIndex] = useState([])
+    const [listIndex, setListIndex] = useState<[]>()
     const _herdService = new HerdService()
 
     useEffect(() => {
@@ -35,13 +35,7 @@ export default function Index() {
     return (
         <>  
            <ButtonsBar buttons={buttons}/>
-            { listIndex.length > 0 ?
-                <HerdsList list={listIndex} title="Listado de hatos" />
-                :
-                <>
-                    <SpinnerLoading/>   
-                </>
-            }   
+            { listIndex && <HerdsList list={listIndex} title="Listado de hatos" /> }   
             <ToastContainer/>        
         </>
       );

@@ -38,8 +38,6 @@ export default function AnimalPageDetail({ params }: DetailProps) {
                 const detailData = await _animalService.detail(params.id)
                 const { detail, statistics, incidents, injectables, offsprings } = detailData;
                 setAnimal(detail);
-                console.log(detail);
-                
                 setStatistics(statistics);
                 setIncidents(incidents);
                 setInjectables(injectables);

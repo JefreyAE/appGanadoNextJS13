@@ -42,13 +42,7 @@ export default function Index(){
     return (
         <>  
             <ButtonsBar buttons={buttons} />
-            { listIndex.length > 0 ?
-                <IncidentsList incidents={listIndex} deleteIncident={delete_incident} />
-                :
-                <><SpinnerLoading/>
-                <ToastContainer/>
-                </>
-            }           
+            { listIndex && <IncidentsList incidents={listIndex} deleteIncident={delete_incident} />}           
         </>
       );
     
