@@ -19,7 +19,7 @@ export default function SelectHerds({ animal, herds, setData, isDisabled = false
                     <span className="input-group-text">{title}</span>
                 </div>
                 <select className="custom-select" onChange={(e) => setData(e.target.value)} id='herd_id' defaultValue={animal.herd_id || undefined} name="herd_id" required disabled={isDisabled}>
-                    {animal.herd_id && <option value={animal.herd_id} >{defaultHerd && defaultHerd.name}</option>}
+                    {animal.herd_id ? <option value={animal.herd_id} >{defaultHerd && defaultHerd.name}</option> : <option></option>}
                     {herds && herds.map((herd, index) => {
                         return (
                             <React.Fragment key={index}>
