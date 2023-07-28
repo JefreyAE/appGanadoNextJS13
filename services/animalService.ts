@@ -81,7 +81,7 @@ export default class AnimalService{
 
     deleteImage(image_name:string,animal_id:number,user_id:number){
         checkAuth()
-        return this.customFetch.get(`${this.url}/api/animals/deleteImage/${image_name}/${animal_id}/${user_id}`,{},{Authorization: this.token})
+        return this.customFetch.delete(`${this.url}/api/animals/deleteImage/${image_name}/${animal_id}/${user_id}`,{},{Authorization: this.token})
         .then(handleResponse)
         .then(handleDataStatus)
         .catch(handleError);

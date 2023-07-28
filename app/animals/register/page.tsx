@@ -24,9 +24,7 @@ export default function Register() {
 
     const register = (e: any) => {
         e.preventDefault();
-        if (isValidAnimalForm) {
-            console.log(animalForm);
-            
+        if (isValidAnimalForm) {   
             animalForm && _animalService.register(animalForm);
         } else {
             toast.error("Debes corregir los datos", {
