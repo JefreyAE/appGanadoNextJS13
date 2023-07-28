@@ -19,7 +19,7 @@ export default class Validations{
         this.borrarError(name);
 
         const patron3 = /^[a-zA-Z0-9,.\s\-/À-ÿ\u00f1\u00d1]+$/u;
-        if (! patron3.test(valor)  && valor) {
+        if (! patron3.test(valor) && valor) {
             this.mostrarErrorMejorado("textarea[name=" + name + "]", "El campo debe contener solo números y letras", name);
             return false;
         }

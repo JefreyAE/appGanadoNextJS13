@@ -7,25 +7,30 @@ import { useEffect, useState } from "react";
 import InputTextArea from "../../components/formComponents/InputTextArea";
 import InputSelect from "../../components/formComponents/InputSelect";
 import InputDate from "../../components/formComponents/InputDate";
-import Validations from "../../../helpers/validations";
 import Injectable from "../../../models/injectable";
 import InjectableService from "../../../services/injectableService";
 import InputText from "../../components/formComponents/InputText";
 import HerdService from "../../../services/herdService";
 import Herd from "../../../models/herds";
 import ButtonsBar from "../../components/ButtonsBar";
+import { validateFormInputs } from "../../../helpers/validationsTool";
 
 type OptionObject = {
     value: string | null | number
     description: string | null
 }
+
+type ValidationObject = {
+    type: string
+    name: string;
+    value: any
+}
+
 export default function Register() {
 
     const _animalService = new AnimalService()
     const _injectableService = new InjectableService()
     const _herdService = new HerdService()
-
-    const validate = new Validations();
 
     const [description, setDescription] = useState('')
     const [injectable_type, setInjectable_type] = useState('')
@@ -54,10 +59,23 @@ export default function Register() {
         generateAnimalsDataOptions(listAnimals, listHerds)
     }, [listHerds, listAnimals])
 
+    useEffect(() => {
+        const inputs:ValidationObject[] = [
+            {type: "alfanumerico", name:"description", value:description},
+            {type: "alfanumerico", name:"injectable_name", value:injectable_name},    
+            {type: "alfanumerico", name:"injectable_brand", value:injectable_brand},        
+        ]
+        validateFormInputs(inputs)
+    },[description, injectable_name, injectable_brand])
 
     const register = async (e: any) => {
+        const inputs:ValidationObject[] = [
+            {type: "alfanumerico", name:"description", value:description},
+            {type: "alfanumerico", name:"injectable_name", value:injectable_name},    
+            {type: "alfanumerico", name:"injectable_brand", value:injectable_brand},        
+        ]
         e.preventDefault();
-        if (validate.validarAlfaNumerico(description) && validate.validarAlfaNumerico(injectable_name) && validate.validarAlfaNumerico(injectable_brand)) {
+        if ( validateFormInputs(inputs)) {
             const injectable = new Injectable(null, animal_id, injectable_type, application_date, injectable_name, injectable_brand, withdrawal_time, effective_time, description, null, null, null, null)
             _injectableService.register(injectable)
         } else {
@@ -83,7 +101,6 @@ export default function Register() {
         { value: 180, description: '180 días - 6 mes' },
         { value: 365, description: '365 días - 1 año' }
     ]
-
 
     const generateAnimalsDataOptions = (animals: Animal[], herds: Herd[]) => {
         let options: any[] = []

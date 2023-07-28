@@ -36,10 +36,13 @@ export default function Register() {
             })
     },[])
 
+    useEffect(()=>{
+        validate.validarAlfaNumericoTextarea('description', description)  
+    },[description])
 
     const register = async (e:any) => {
         e.preventDefault();
-        if (validate.validarAlfaNumerico(description)) {       
+        if (validate.validarAlfaNumericoTextarea('description', description)) {       
             const incident = new Incident(null, animal_id, incident_date, incident_type, description, null, null, null)     
             _incidentService.register(incident)   
         }else{
