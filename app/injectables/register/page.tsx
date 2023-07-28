@@ -61,7 +61,7 @@ export default function Register() {
 
     useEffect(() => {
         const inputs:ValidationObject[] = [
-            {type: "alfanumerico", name:"description", value:description},
+            {type: "textarea", name:"description", value:description},
             {type: "alfanumerico", name:"injectable_name", value:injectable_name},    
             {type: "alfanumerico", name:"injectable_brand", value:injectable_brand},        
         ]
@@ -70,7 +70,7 @@ export default function Register() {
 
     const register = async (e: any) => {
         const inputs:ValidationObject[] = [
-            {type: "alfanumerico", name:"description", value:description},
+            {type: "textarea", name:"description", value:description},
             {type: "alfanumerico", name:"injectable_name", value:injectable_name},    
             {type: "alfanumerico", name:"injectable_brand", value:injectable_brand},        
         ]
