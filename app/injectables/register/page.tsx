@@ -69,7 +69,7 @@ export default function Register() {
     }
 
     const injectableTypeOptions: string[] = [
-        'Antibiótico', 'Desparasitante', 'Vitaminas', 'Vacuna', 'Inmuno Estimulante', 'Hormonas', 'Otro'
+        'Antibiotico', 'Desparasitante', 'Vitaminas', 'Vacuna', 'Inmuno Estimulante', 'Hormonas', 'Otro'
     ];
     const periodOptions: OptionObject[] = [
         { value: 8, description: '8' },
@@ -106,7 +106,7 @@ export default function Register() {
                     <form id="form-detail-update" onSubmit={register} className="form_data form-group row">
                         <InputSelect name="animal_id" title="Seleccione el animal" options={animalDataOptions || []} setData={setAnimal_id} />
                         <InputSelect name="injectable_type" title="Tipo de inyectable" options={injectableTypeOptions} setData={setInjectable_type} />
-                        <InputDate name="application_date" title="Fecha de aplicación" setData={setApplication_date} />
+                        <InputDate name="application_date" title="Fecha de aplicación" setData={setApplication_date} isRequired={true}/>
                         <InputText name="injectable_name" title="Nombre del inyectable" setData={setInjectable_name} />
                         <InputText name="injectable_brand" title="Marca del inyectable" setData={setInjectable_brand} />
                         <InputSelect name="withdrawal_time" title="Periodo de retiro" options={periodOptions} setData={setWithdrawal_time} />
