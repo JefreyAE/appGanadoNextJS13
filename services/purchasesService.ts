@@ -50,7 +50,7 @@ export default class PurchasesService{
 
     delete(purchase_id:number, animal_id:number){
         checkAuth()
-        return this.customFetch.get(`${this.url}/api/purchases/purchase/delete/${purchase_id}/${animal_id}`,{},{Authorization: this.token})
+        return this.customFetch.delete(`${this.url}/api/purchases/purchase/delete/${purchase_id}/${animal_id}`,{},{Authorization: this.token})
         .then(handleResponse)
         .then(handleDataStatus)
         .catch(handleError);

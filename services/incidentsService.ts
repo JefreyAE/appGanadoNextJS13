@@ -50,7 +50,7 @@ export default class IncidentsService{
 
     delete(incident_id:number, animal_id:number){
         checkAuth()
-        return this.customFetch.get(`${this.url}/api/incidents/incident/delete/${incident_id}/${animal_id}`,{},{Authorization: this.token})
+        return this.customFetch.delete(`${this.url}/api/incidents/incident/delete/${incident_id}/${animal_id}`,{},{Authorization: this.token})
         .then(handleResponse)
         .then(handleDataStatus)
         .catch(handleError);

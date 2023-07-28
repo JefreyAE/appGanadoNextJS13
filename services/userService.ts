@@ -34,7 +34,7 @@ export default class UserService {
     }
 
     deleteByAdmin(id:number){    
-        return this.customFetch.get(`${this.url}/api/user/deleteByAdmin/${id}`,{},{Authorization: this.token})
+        return this.customFetch.delete(`${this.url}/api/user/deleteByAdmin/${id}`,{},{Authorization: this.token})
         .then(handleResponse)
         .then(handleDataStatus)
         .catch(handleError);
@@ -50,7 +50,7 @@ export default class UserService {
     updatePassword(passwordNew:string, passwordRepeat:string, passwordCurrent:string){
         let data = {passwordNew:passwordNew, passwordRepeat:passwordRepeat, passwordCurrent: passwordCurrent}
         const token = getCookie('token');     
-        return this.customFetch.post(this.url+"/api/user/update/password", data,{},{Authorization: token})
+        return this.customFetch.put(this.url+"/api/user/update/password", data,{},{Authorization: token})
         .then(handleResponse)
         .then(handleDataStatus)
         .catch(handleError);
@@ -72,7 +72,7 @@ export default class UserService {
 
     updateProfile(user:User){
         checkAuth()  
-        return this.customFetch.post(this.url+"/api/user/update/profile",user,{},{Authorization: this.token})
+        return this.customFetch.put(this.url+"/api/user/update/profile",user,{},{Authorization: this.token})
         .then(handleResponse)
         .then(handleDataStatus)
         .catch(handleError);
@@ -80,7 +80,7 @@ export default class UserService {
 
     updateUser(updatedData:{}){
         checkAuth()  
-        return this.customFetch.post(this.url+"/api/user/update/user",updatedData,{},{Authorization: this.token})
+        return this.customFetch.put(this.url+"/api/user/update/user",updatedData,{},{Authorization: this.token})
         .then(handleResponse)
         .then(handleDataStatus)
         .catch(handleError);

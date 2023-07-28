@@ -50,7 +50,7 @@ export default class SalesService{
 
     delete(sale_id:number, animal_id:number){
         checkAuth()
-        return this.customFetch.get(`${this.url}/api/sales/sale/delete/${sale_id}/${animal_id}`,{},{Authorization: this.token})
+        return this.customFetch.delete(`${this.url}/api/sales/sale/delete/${sale_id}/${animal_id}`,{},{Authorization: this.token})
         .then(handleResponse)
         .then(handleDataStatus)
         .catch(handleError);

@@ -45,7 +45,7 @@ export default class HerdService{
 
     delete(id:number){
         checkAuth()
-        return this.customFetch.get(this.url+"/api/herds/delete/"+id,{},{Authorization: this.token})
+        return this.customFetch.delete(this.url+"/api/herds/delete/"+id,{},{Authorization: this.token})
         .then(handleResponse)
         .then(handleDataStatus)
         .catch(handleError);

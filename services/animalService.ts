@@ -52,7 +52,7 @@ export default class AnimalService{
 
     delete(id:number){
         checkAuth()
-        return this.customFetch.get(this.url+"/api/animals/delete/"+id,{},{Authorization: this.token})
+        return this.customFetch.delete(this.url+"/api/animals/delete/"+id,{},{Authorization: this.token})
         .then(handleResponse)
         .then(handleDataStatus)
         .catch(handleError);

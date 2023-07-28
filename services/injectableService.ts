@@ -50,7 +50,7 @@ export default class InjectablesService{
 
     delete(creation_time:number, animal_id:number){
         checkAuth()  
-        return this.customFetch.get(`${this.url}/api/injectables/injectable/deleteInjectable/${creation_time}/${animal_id}`,{},{Authorization: this.token})
+        return this.customFetch.delete(`${this.url}/api/injectables/injectable/delete/${creation_time}/${animal_id}`,{},{Authorization: this.token})
         .then(handleResponse)
         .then(handleDataStatus)
         .catch(handleError);
@@ -58,7 +58,7 @@ export default class InjectablesService{
 
     deleteAll(creation_time:number){
         checkAuth()
-        return this.customFetch.get(`${this.url}/api/injectables/injectable/deleteAll/${creation_time}`,{},{Authorization: this.token})
+        return this.customFetch.delete(`${this.url}/api/injectables/injectable/deleteAll/${creation_time}`,{},{Authorization: this.token})
         .then(handleResponse)
         .then(handleDataStatus)
         .catch(handleError);
