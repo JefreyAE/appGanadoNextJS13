@@ -79,7 +79,7 @@ export default function Register() {
             <div className="form col-lg-8" id='formDetailAnimal'>
                 <form id="form-detail-update" onSubmit={register} className="form_data form-group row">
                     <InputSelect name="animal_id" title="Seleccione el animal" options={animalDataOptions || []} setData={setAnimal_id} />
-                    <InputDate name="incident_date" title="Fecha del incidente" setData={setIncident_date} />
+                    <InputDate name="incident_date" title="Fecha del incidente" setData={setIncident_date} isRequired={true} />
                     <InputSelect name="incident_type" title="Tipo de incidente" options={incidentTypeOptions} setData={setIncident_type} />
                     <InputTextArea name="description" title="Descripción del incidente" setData={setDescription}/>
                     <input type="submit" className="btn btn-success btn-lg btn-block" value="Registrar" id="btnRegister" />
