@@ -89,13 +89,3 @@ export default class Validations{
 
     }
 }
-
-const validationSelector = (value)=>{
-
-    switch(value){
-        case value === 'email':
-            
-        break;
-    }
-
-}

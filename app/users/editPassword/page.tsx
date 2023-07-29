@@ -5,6 +5,13 @@ import UserService from "../../../services/userService";
 import Validations from "../../../helpers/validations";
 import 'react-toastify/dist/ReactToastify.css';
 import InputPasswordWithLabel from "../../components/formComponents/InputPasswordWithLabel";
+import { validateFormInputs } from "../../../helpers/validationsTool";
+
+type ValidationObject = {
+    type: string
+    name: string;
+    value: any
+}
 
 export default function Credentials() {
 
@@ -12,14 +19,18 @@ export default function Credentials() {
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');
 
-    const [isValidForm, setIsValidForm] = useState(false)
-
     const _userService = new UserService()
     const validate = new Validations();
 
     const update = (e: React.FormEvent) => {
         e.preventDefault();
-        if (isValidForm) {
+
+        const inputs:ValidationObject[] = [
+            {type: "password", name:"password1", value:password1},
+            {type: "password", name:"password2", value:password2},
+            {type: "password", name:"passwordCurrent", value:passwordCurrent},
+        ]
+        if (validateFormInputs(inputs)) {   
             _userService.updatePassword(password1, password2, passwordCurrent);
         } else {
             toast.error("Debes corregir los datos", {
@@ -30,12 +41,25 @@ export default function Credentials() {
     }
 
     useEffect(() => {
-        setIsValidForm(validateForm())
-    }, [password1, password2, passwordCurrent])
+        const inputs:ValidationObject[] = [
+            {type: "password", name:"password1", value:password1},
+        ]
+        password1 !== '' && validateFormInputs(inputs)
+    }, [password1])
 
-    const validateForm = () => {
-        return validate.validarAlfaNumerico("password1", password1 || "") && validate.validarAlfaNumerico("password1", password1 || "") && validate.validarAlfaNumerico("passwordCurrent", passwordCurrent || "")
-    }
+    useEffect(() => {
+        const inputs:ValidationObject[] = [    
+            {type: "password", name:"password2", value:password2},
+        ]
+        password2 !== '' && validateFormInputs(inputs)
+    }, [password2])
+
+    useEffect(() => {
+        const inputs:ValidationObject[] = [
+            {type: "password", name:"passwordCurrent", value:passwordCurrent},
+        ]
+        passwordCurrent !== '' && validateFormInputs(inputs)
+    }, [passwordCurrent])
 
     return (
         <div className="col-md-12 row justify-content-center">

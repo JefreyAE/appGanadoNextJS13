@@ -59,15 +59,30 @@ export const validarCorreo = (name: string, val: any = "test@gmail.com"):boolean
     return true;
 }
 
-export const validarPassLogin = (name: string, val: any = ""):void => {
+export const validarPassword = (name: string, val: any = ""):boolean => {
 
     var valor = val.current ? val.current.value : val;
     borrarError(name);
 
-    const patron3 = /^(([a-zA-Z-0-9]))+$/u;
+    const patron3 = /^(([a-zA-Z0-9_$%&#@\-]))+$/u;
     if (!patron3.test(valor)) {
-        mostrarErrorMejorado("input[name=" + name + "]", "La constraseña debe ser alfanumérica.", name);
+        mostrarErrorMejorado("input[name=" + name + "]", "La constraseña debe ser alfanumérica sin espacios y contener caracteres especiales como: _$%&#@-", name);
+        return false;
     }
+    return true;
+}
+
+export const validarPasswordLogin = (name: string, val: any = ""):boolean => {
+
+    var valor = val.current ? val.current.value : val;
+    borrarError(name);
+
+    const patron3 = /^(([a-zA-Z0-9_$%&#@\-]))+$/u;
+    if (!patron3.test(valor)) {
+        mostrarErrorMejorado("input[name=" + name + "]", "La constraseña no es válida", name);
+        return false;
+    }
+    return true;
 }
 
 export const mostrarErrorMejorado = (element: any, error: string, name: string):void => {
@@ -97,13 +112,16 @@ const validationSelector = (data: ValidationObject) => {
         case 'email':
             return validarCorreo(data.name, data.value)
         case 'password':
-            return validarAlfaNumerico(data.name, data.value)
+            return validarPassword(data.name, data.value)
         case 'textarea':
             return validarAlfaNumericoTextarea(data.name, data.value)
         case 'alfanumerico':
             return validarAlfaNumerico(data.name, data.value)
         case 'numerico':
             return validarNumerico(data.name, data.value)
+        case 'passwordLogin':
+            return validarPasswordLogin(data.name, data.value)
+
     }
 }
 

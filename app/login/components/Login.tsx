@@ -10,7 +10,13 @@ import UserService from '../../../services/userService'
 import Constants from '../../../helpers/constants'
 import { UserContext } from '../../../contexts/userContext'
 import InputTextWithLabel from '../../components/formComponents/InputTextWithLabel'
+import { validateFormInputs } from '../../../helpers/validationsTool'
 
+type ValidationObject = {
+    type: string
+    name: string;
+    value: any
+}
 interface User {
     name: string;
     email: string;
@@ -25,7 +31,6 @@ interface State {
 
 export default function Login() {
 
-    const emailRef = useRef<HTMLInputElement>(null)
     const _userService = new UserService()
     const constants = new Constants()
     const { updateUser } = useContext(UserContext)
@@ -44,7 +49,14 @@ export default function Login() {
     useEffect(() => {
         deleteCookie('token')
         sessionStorage.removeItem('token');
-    },[])
+    }, [])
+
+    useEffect(() => {
+        const inputs: ValidationObject[] = [
+            { type: "passwordLogin", name: "password", value: password },
+        ]
+        password && password !== '' && validateFormInputs(inputs)
+    }, [password])
 
     const styleNone = {
         "display": "none"
@@ -56,18 +68,21 @@ export default function Login() {
     const loguear = (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (email) {      
+        const inputs: ValidationObject[] = [
+            { type: "passwordLogin", name: "password", value: password },
+        ]
+        
+        if (validateFormInputs(inputs)) {
             setIsLoading(true);
             _userService.login(email, password)
-                .then((data) => {                
+                .then((data) => {
                     if (data.status === 'success') {
-                        setCookie('token',  JSON.stringify(data.token), {maxAge: constants.getTokenExpirationTime()});
+                        setCookie('token', JSON.stringify(data.token), { maxAge: constants.getTokenExpirationTime() });
                         updateUser(data.user)
                         router.push('/main')
-                    } else {                     
+                    } else {
                         setIsLoading(false)
                         setState((prevState) => ({ ...prevState, message: data.message }));
-                        router.push('/')
                         deleteCookie('token')
                     }
                 })
@@ -76,7 +91,7 @@ export default function Login() {
                     toast.error("A ocurrido un error al ingresar.", {
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 3000,
-                      });
+                    });
                 });
         }
     }
@@ -86,19 +101,19 @@ export default function Login() {
             <div className="form col-lg-4" id='formLogin' style={isLoading ? styleNone : styleShow}>
                 <h2>Ingrese sus credenciales</h2>
                 <form onSubmit={loguear} id="formLog">
-                    <InputTextWithLabel 
+                    <InputTextWithLabel
                         title='Correo Electrónico:'
-                        type='email' 
+                        type='email'
                         name='email'
                         placeholder='@'
                         setData={setEmail}
-                        defaultValue="demo@gmail.com"
+                        defaultValue=""
                         isRequired={true}
                     />
-                    <InputPasswordWithLabel 
-                        title="Contraseña:" 
-                        setData={setPassword} 
-                        name="password"  
+                    <InputPasswordWithLabel
+                        title="Contraseña:"
+                        setData={setPassword}
+                        name="password"
                         placeholder=""
                         autoComplete="new-password"
                     />
