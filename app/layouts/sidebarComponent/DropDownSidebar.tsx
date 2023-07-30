@@ -32,7 +32,7 @@ export default function DropDownSidebar({ title, listElments }: DropDownElementP
                             e.stopPropagation(); 
                           };
                         return (
-                            <li className="ml-5" key={key}><Link onClick={handleItemClick} href={elementList.url}>{elementList.description}</Link></li>
+                            elementList.url && <li className="ml-5" key={key}><Link onClick={handleItemClick} href={elementList.url}>{elementList.description}</Link></li>
                         )
                     })
                 }
