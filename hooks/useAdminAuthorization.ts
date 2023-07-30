@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 export default function useAdminAuthorization(redirect:boolean=false){
 
     const {userContext} = useContext(UserContext)
-
     const router = useRouter()
 
     const [isAuthorize, setIsAuthorize] = useState(false)

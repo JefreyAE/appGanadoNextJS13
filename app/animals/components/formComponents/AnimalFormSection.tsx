@@ -11,12 +11,7 @@ import UpdateSection from "../../../components/formComponents/UpdateSection";
 import { validateFormInputs } from "../../../../helpers/validationsTool";
 import SelectHerd from './AnimalSelectHerd'
 import HerdService from "../../../../services/herdService";
-
-type ValidationObject = {
-    type: string
-    name: string;
-    value: any
-}
+import { ValidationObject } from "../../../../types/types";
 
 interface AnimalFormSectionProps{
     getAnimalFormData: (fn:() => Animal)=>void

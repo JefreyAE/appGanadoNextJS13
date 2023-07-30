@@ -1,15 +1,12 @@
+
 import Link from "next/link";
-
-type ListElements = {
-    description: string
-    url: string
-}
-
+import { ListElements } from "../../../types/types";
 interface DropDownElementProp {
     title: string
     listElments: ListElements[]
+    collapseNavbar?: ()=>void
 }
-export default function DropDownElement({ title, listElments }: DropDownElementProp) {
+export default function DropDownElement({ title, listElments, collapseNavbar }: DropDownElementProp) {
     return (
         <li className="nav-item dropdown dropdown-responsive">
             <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -18,7 +15,7 @@ export default function DropDownElement({ title, listElments }: DropDownElementP
             <ul className="dropdown-menu" aria-labelledby="/navbarDropdown">
                 {listElments && listElments.map((elementList: ListElements, key) => {
                         return (
-                            <li key={key}><Link className="dropdown-item" href={elementList.url}>{elementList.description}</Link></li>
+                            <li key={key}><Link onClick={collapseNavbar} className="dropdown-item" href={elementList.url}>{elementList.description}</Link></li>
                         )
                     })
                 }

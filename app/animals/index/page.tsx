@@ -2,15 +2,10 @@
 import React, { useEffect, useState } from "react";
 import AnimalService from "../../../services/animalService";
 import AnimalsList from "../components/AnimalsList";
-import { ToastContainer } from "react-toastify";
-import SpinnerLoading from "../../components/SpinnerLoading";
 import 'react-toastify/dist/ReactToastify.css';
 import ButtonsBar from "../../components/ButtonsBar";
+import { ButtonsObject } from "../../../types/types";
 
-type ButtonsObject = {
-    description: string
-    url: string
-}
 export default function Index() {
 
     const [listIndex, setListIndex] = useState<[]>()

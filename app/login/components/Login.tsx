@@ -11,22 +11,10 @@ import Constants from '../../../helpers/constants'
 import { UserContext } from '../../../contexts/userContext'
 import InputTextWithLabel from '../../components/formComponents/InputTextWithLabel'
 import { validateFormInputs } from '../../../helpers/validationsTool'
-
-type ValidationObject = {
-    type: string
-    name: string;
-    value: any
-}
-interface User {
-    name: string;
-    email: string;
-    password: string;
-}
+import { ValidationObject } from '../../../types/types'
 
 interface State {
     message: string;
-    contador: number;
-    user: User;
 }
 
 export default function Login() {
@@ -43,8 +31,6 @@ export default function Login() {
 
     const [state, setState] = useState<State>({
         message: "",
-        contador: 0,
-        user: { name: '', email: '', password: '' },
     })
     useEffect(() => {
         deleteCookie('token')
@@ -71,7 +57,7 @@ export default function Login() {
         const inputs: ValidationObject[] = [
             { type: "passwordLogin", name: "password", value: password },
         ]
-        
+
         if (validateFormInputs(inputs)) {
             setIsLoading(true);
             _userService.login(email, password)

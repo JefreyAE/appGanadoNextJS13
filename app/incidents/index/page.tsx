@@ -1,15 +1,9 @@
 'use client'
 import IncidentsList from "../components/IncidentsList"
 import IncidentsService from "../../../services/incidentsService"
-import { ToastContainer } from "react-toastify"
 import { useEffect, useState } from "react"
-import SpinnerLoading from "../../components/SpinnerLoading"
 import ButtonsBar from "../../components/ButtonsBar"
-
-type ButtonsObject = {
-    description: string
-    url: string
-}
+import { ButtonsObject } from "../../../types/types"
 
 export default function Index(){
 

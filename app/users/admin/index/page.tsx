@@ -6,11 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import UserService from "../../../../services/userService";
 import ButtonsBar from "../../../components/ButtonsBar";
 import useAdminAuthorization from "../../../../hooks/useAdminAuthorization";
-
-type ButtonsObject = {
-    description: string
-    url: string
-}
+import { ButtonsObject } from "../../../../types/types";
 
 export default function Index() {
 

@@ -27,8 +27,7 @@ export default function HerdsList(props: HerdListProps) {
                                 return (
                                     <tr key={index}>
                                         <td>{herd.name && herd.name}</td>
-                                        <td>{herd.description && herd.description}</td>
-                                       
+                                        <td>{herd.description && herd.description}</td>                                     
                                         <td>
                                             <Link
                                                 className="btn btn-sm btn-info"

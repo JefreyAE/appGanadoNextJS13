@@ -40,10 +40,14 @@ export default function AnimalDetail({animal, animals}:AnimalDetailInterface) {
 
     const deleteAnimal = (e:any) => {
         e.preventDefault()
-        _animalService.delete(animal.id)
-            .finally(() => {
-                router.push('/animals/index');
-            })
+        const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este registro?");
+
+        if (confirmDelete) {
+            _animalService.delete(animal.id)
+                .finally(() => {
+                    router.push('/animals/index');
+                })
+        }
     }
 
     return (

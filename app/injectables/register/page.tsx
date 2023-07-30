@@ -14,17 +14,7 @@ import HerdService from "../../../services/herdService";
 import Herd from "../../../models/herds";
 import ButtonsBar from "../../components/ButtonsBar";
 import { validateFormInputs } from "../../../helpers/validationsTool";
-
-type OptionObject = {
-    value: string | null | number
-    description: string | null
-}
-
-type ValidationObject = {
-    type: string
-    name: string;
-    value: any
-}
+import { OptionObject, ValidationObject } from "../../../types/types";
 
 export default function Register() {
 

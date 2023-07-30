@@ -11,7 +11,6 @@ export default function Register(){
 
     const [ herd, setHerd ] = useState<Herd>({} as Herd)
     const [isValidHerdForm, setIsValidHerdForm] = useState(true)
-
     const _herdService = new HerdService();
     
     const register = (e: any) => {

@@ -5,13 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Herd from "../../../models/herds";
 import InputText from "../../components/formComponents/InputText";
 import { validateFormInputs } from "../../../helpers/validationsTool";
-
-type ValidationObject = {
-    type: string
-    name: string;
-    value: any
-}
-
+import { ValidationObject } from "../../../types/types";
 interface HerdFormSectionProps{
     getHerdFormData: (fn:() => Herd)=>void
     herdValidationForm: (fn:() => boolean)=>void

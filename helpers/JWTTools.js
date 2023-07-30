@@ -20,9 +20,7 @@ function validateJWT() {
     } else {
         return false;
     }
-
 }
-
 
 function refreshTimeJWT() {
     const constants = new Constants()
@@ -31,7 +29,6 @@ function refreshTimeJWT() {
     
     if (token) {
         const [header, payload, signature] = token.split('.');
-
         try {
             const decodedPayload = JSON.parse(atob(payload));
             const currentTime = Math.floor(Date.now() / 1000); // Obtiene la fecha actual en segundos
@@ -49,7 +46,6 @@ function refreshTimeJWT() {
     } else {
         return false;
     }
-
 }
 
 export { validateJWT, refreshTimeJWT };

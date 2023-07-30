@@ -14,24 +14,16 @@ export default function SideBarNavigation() {
         setIsVisible(isVisible ? false : true)
     }
 
-    const hidde = {
-        display: 'none'
-    }
-
-    const show = {
-        display: 'block'
-    }
+    const hidde = {display: 'none'}
+    const show = {display: 'block'}
 
     useEffect(() => {
         const updateHeight = () => {
             var viewportHeight = window.innerHeight;
             setHeightStyle({ display: 'flex', minHeight: viewportHeight })
         }
-
         updateHeight()
-
         window.addEventListener("resize", updateHeight)
-
         return () =>{
             window && window.removeEventListener("resize", updateHeight)
         }

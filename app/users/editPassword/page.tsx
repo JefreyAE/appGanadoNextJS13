@@ -2,25 +2,18 @@
 import { ToastContainer, toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import UserService from "../../../services/userService";
-import Validations from "../../../helpers/validations";
 import 'react-toastify/dist/ReactToastify.css';
 import InputPasswordWithLabel from "../../components/formComponents/InputPasswordWithLabel";
 import { validateFormInputs } from "../../../helpers/validationsTool";
-
-type ValidationObject = {
-    type: string
-    name: string;
-    value: any
-}
+import { ValidationObject } from "../../../types/types";
 
 export default function Credentials() {
 
-    const [passwordCurrent, setPasswordCurrent] = useState('');
-    const [password1, setPassword1] = useState('');
-    const [password2, setPassword2] = useState('');
+    const [passwordCurrent, setPasswordCurrent] = useState('T');
+    const [password1, setPassword1] = useState('T');
+    const [password2, setPassword2] = useState('T');
 
     const _userService = new UserService()
-    const validate = new Validations();
 
     const update = (e: React.FormEvent) => {
         e.preventDefault();
@@ -43,23 +36,11 @@ export default function Credentials() {
     useEffect(() => {
         const inputs:ValidationObject[] = [
             {type: "password", name:"password1", value:password1},
-        ]
-        password1 !== '' && validateFormInputs(inputs)
-    }, [password1])
-
-    useEffect(() => {
-        const inputs:ValidationObject[] = [    
             {type: "password", name:"password2", value:password2},
-        ]
-        password2 !== '' && validateFormInputs(inputs)
-    }, [password2])
-
-    useEffect(() => {
-        const inputs:ValidationObject[] = [
             {type: "password", name:"passwordCurrent", value:passwordCurrent},
         ]
-        passwordCurrent !== '' && validateFormInputs(inputs)
-    }, [passwordCurrent])
+        password1 !== '' && validateFormInputs(inputs)
+    }, [password1, password2, passwordCurrent])
 
     return (
         <div className="col-md-12 row justify-content-center">

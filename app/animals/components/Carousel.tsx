@@ -1,14 +1,7 @@
 'use client'
 import React from "react";
 import ImgCarousel from "./ImgCarousel"
-
-interface Image {
-    animal_id: number,
-    title: string,
-    description: string,
-    image_name: string,
-    user_id: number
-}
+import { Image } from "../../../types/types";
 
 interface CarouselProps {
     listImages: any

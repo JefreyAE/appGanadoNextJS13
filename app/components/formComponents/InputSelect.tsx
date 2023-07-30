@@ -1,9 +1,4 @@
-
-type OptionObject = {
-    value: string
-    description: string
-}
-
+import { OptionObject } from "../../../types/types"
 interface InputSelectProps{
     setData: (e:any)=>any
     entity?: {[key:string]:any} | undefined

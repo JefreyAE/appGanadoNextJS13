@@ -12,12 +12,7 @@ import InputSelect from '../../../../components/formComponents/InputSelect'
 import { ROLES, userStates } from '../../../../../helpers/enums'
 import { useRouter } from 'next/navigation'
 import useAdminAuthorization from '../../../../../hooks/useAdminAuthorization'
-
-type OptionObject = {
-    value: string | null | number
-    description: string | null
-}
-
+import { OptionObject } from '../../../../../types/types'
 interface UserProfileProps {
     params: any
 }

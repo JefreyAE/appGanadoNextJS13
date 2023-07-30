@@ -11,6 +11,7 @@ import Sale from "../../../models/sales";
 import SalesService from "../../../services/salesService";
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from "react";
+import { OptionObject } from "../../../types/types";
 
 interface SaleFormSectionProps{
     getSaleFormData: (fn:() => Sale)=>void
@@ -20,11 +21,6 @@ interface SaleFormSectionProps{
     animals?: Animal[]
     action?:string 
     isFormDisabled: boolean 
-}
-
-type OptionObject = {
-    value: string | null | number
-    description: string | null
 }
 
 const Emptysale = new Sale(null,null,null,null,null,null,null,null,null,null,null,null,null)

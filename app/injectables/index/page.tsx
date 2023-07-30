@@ -1,16 +1,9 @@
 'use client'
 import InjectablesList from "../components/InjectablesList"
 import InjectablesService from "../../../services/injectableService"
-import { ToastContainer } from "react-toastify"
 import { useEffect, useState } from "react"
-import SpinnerLoading from "../../components/SpinnerLoading"
-import Link from "next/link"
 import ButtonsBar from "../../components/ButtonsBar"
-
-type ButtonsObject = {
-    description: string
-    url: string
-}
+import { ButtonsObject } from "../../../types/types"
 
 export default function Index() {
 

@@ -1,7 +1,6 @@
 
 
 export const validarAlfaNumerico = (name: string, val: any = ""):boolean => {
-
     var valor = val.current ? val.current.value : val;
     borrarError(name);
 
@@ -13,7 +12,6 @@ export const validarAlfaNumerico = (name: string, val: any = ""):boolean => {
     return true;
 }
 export const validarAlfaNumericoTextarea = (name: string, val: any = ""):boolean => {
-
     var valor = val.current ? val.current.value : val;
     borrarError(name);
 
@@ -26,7 +24,6 @@ export const validarAlfaNumericoTextarea = (name: string, val: any = ""):boolean
 }
 
 export const validarNumerico = (name: string, val: any = 0):boolean => {
-
     var valor = val.current ? val.current.value : val;
     borrarError(name);
     // Patron para los correos

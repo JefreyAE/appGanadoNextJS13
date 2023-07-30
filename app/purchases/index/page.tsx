@@ -5,12 +5,7 @@ import TradesList from "../../components/TradesList"
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 import ButtonsBar from "../../components/ButtonsBar";
-import SpinnerLoading from "../../components/SpinnerLoading";
-
-type ButtonsObject = {
-    description: string
-    url: string
-}
+import { ButtonsObject } from "../../../types/types";
 
 export default function Index(){
 

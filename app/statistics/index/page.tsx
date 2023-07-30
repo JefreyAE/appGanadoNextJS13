@@ -1,7 +1,6 @@
 'use client'
 import React, { useEffect, useState } from "react";
 import StatisticsService from '../../../services/statisticsService'
-
 import { ToastContainer } from "react-toastify";
 import SpinnerLoading from "../../components/SpinnerLoading";
 import 'react-toastify/dist/ReactToastify.css';

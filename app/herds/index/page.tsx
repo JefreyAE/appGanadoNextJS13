@@ -6,11 +6,7 @@ import SpinnerLoading from "../../components/SpinnerLoading";
 import 'react-toastify/dist/ReactToastify.css';
 import HerdService from "../../../services/herdService";
 import ButtonsBar from "../../components/ButtonsBar";
-
-type ButtonsObject = {
-    description: string
-    url: string
-}
+import { ButtonsObject } from "../../../types/types";
 
 export default function Index() {
 

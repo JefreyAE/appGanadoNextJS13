@@ -8,8 +8,7 @@ import SearchForm from "../../components/SearchForm"
 
 export default function Search() {
 
-    const _purchaseService = new PurchasesService();
-    
+    const _purchaseService = new PurchasesService();    
     const [purchaseList, setPurchasesList] = useState<[] | undefined>();
 
     const searchData = (date1:string, date2:string) => {     

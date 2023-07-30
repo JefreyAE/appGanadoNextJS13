@@ -2,27 +2,26 @@
 import { ToastContainer, toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import UserService from "../../../services/userService";
-import Validations from "../../../helpers/validations";
 import 'react-toastify/dist/ReactToastify.css';
 import InputPasswordWithLabel from "../../components/formComponents/InputPasswordWithLabel";
 import InputTextWithLabel from "../../components/formComponents/InputTextWithLabel";
 import User from "../../../models/user";
 import { setCookie } from "cookies-next";
 import Constants from "../../../helpers/constants";
+import { validateFormInputs } from "../../../helpers/validationsTool";
+import { ValidationObject } from "../../../types/types";
 
 export default function EditProfile() {
 
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
     const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('x')
     const [contact_email, setContact_email] = useState('')
     const [phone_number, setPhone_number] = useState('')
-    const [isValidForm, setIsValidForm] = useState(false)
 
     const _userService = new UserService()
     const [user, setUser] = useState<User>()
-    const validate = new Validations()
     const constants = new Constants()
 
     useEffect(() => {
@@ -36,7 +35,15 @@ export default function EditProfile() {
         e.preventDefault()
         const user = new User(null, name, email, password, contact_email, phone_number, null, surname, null,null)
 
-        if (isValidForm) {
+        const inputs:ValidationObject[] = [
+            {type: "alfanumerico", name:"surname", value:surname},
+            {type: "alfanumerico", name:"name", value:name},
+            {type: "passwordLogin", name:"password", value:password},
+            {type: "email", name:"email", value:email},
+            {type: "email", name:"contact_email", value:contact_email},
+            {type: "alfanumerico", name:"phone_number", value:phone_number},
+        ]
+        if (validateFormInputs(inputs)) {  
             _userService.updateProfile(user)
                 .then((data) => {
                     if (data && data.status === 'success') {
@@ -52,12 +59,17 @@ export default function EditProfile() {
     }
 
     useEffect(() => {
-        setIsValidForm(validateForm())
+        const inputs:ValidationObject[] = [
+            {type: "alfanumerico", name:"surname", value:surname},
+            {type: "alfanumerico", name:"name", value:name},
+            {type: "passwordLogin", name:"password", value:password},
+            {type: "email", name:"email", value:email},
+            {type: "email", name:"contact_email", value:contact_email},
+            {type: "alfanumerico", name:"phone_number", value:phone_number},
+        ]
+        validateFormInputs(inputs)  
     }, [name, surname, email, password, contact_email, phone_number])
 
-    const validateForm = () => {
-        return validate.validarAlfaNumerico("surname", surname || "") && validate.validarAlfaNumerico("name", name || "") && validate.validarAlfaNumerico("password", password || "") && validate.validarCorreo("email", email || "test@test.com") && validate.validarCorreo("contact_email", contact_email || "test@test.com") && validate.validarAlfaNumerico('phone_number', phone_number || "")
-    }
 
     return (
         <div className="col-md-12 row justify-content-center">

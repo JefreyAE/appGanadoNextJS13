@@ -1,10 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
-
-type ListElements = {
-    description: string
-    url: string
-}
+import { ListElements } from "../../../types/types";
 
 interface DropDownElementProp {
     title: string

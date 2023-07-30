@@ -1,8 +1,6 @@
 'use client'
 import React, { useEffect, useState } from "react";
 import NotificationsList from "../components/NotificationsList";
-import { ToastContainer } from "react-toastify";
-import SpinnerLoading from "../../components/SpinnerLoading";
 import 'react-toastify/dist/ReactToastify.css';
 import NotificationsService from "../../../services/notificationsService";
 import ButtonsBar from "../../components/ButtonsBar";

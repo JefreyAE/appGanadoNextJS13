@@ -11,13 +11,8 @@ import HerdForm from "../../components/HerdForm";
 import AnimalsList from "../../../animals/components/AnimalsList";
 import SpinnerLoading from "../../../components/SpinnerLoading";
 import UpdateSection from "../../../components/formComponents/UpdateSection";
-import Link from "next/link";
 import ButtonsBar from "../../../components/ButtonsBar";
-
-type ButtonsObject = {
-    description: string
-    url: string
-}
+import { ButtonsObject } from "../../../../types/types";
 
 interface DetailProps {
     params: any

@@ -1,12 +1,11 @@
-
 export default class CustomFetch {
 
   post(url, params, options = {}, headerOptions = {}) {
 
-    let URLparams = new URLSearchParams();
+    const URLparams = new URLSearchParams();
     URLparams.append('json', JSON.stringify(params));
 
-    let requestOptions = {
+    const requestOptions = {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -21,7 +20,7 @@ export default class CustomFetch {
 
   postImage(url, params, options = {}, headerOptions = {}) {
 
-    let requestOptions = {
+    const requestOptions = {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -36,7 +35,7 @@ export default class CustomFetch {
 
   get(url, options = {}, headerOptions = {}) {
 
-    let requestOptions = {
+    const requestOptions = {
       method: 'GET',
       headers: { ...headerOptions },
       ...options
@@ -46,10 +45,10 @@ export default class CustomFetch {
 
   put(url, params, options = {}, headerOptions = {}) {
 
-    let URLparams = new URLSearchParams();
+    const URLparams = new URLSearchParams();
     URLparams.append('json', JSON.stringify(params));
 
-    let requestOptions = {
+    const requestOptions = {
       method: 'PUT',
       mode: 'cors',
       headers: {
@@ -65,7 +64,7 @@ export default class CustomFetch {
 
   delete(url, options = {}, headerOptions = {}) {
 
-    let requestOptions = {
+    const requestOptions = {
       method: 'DELETE',
       headers: { ...headerOptions },
       ...options

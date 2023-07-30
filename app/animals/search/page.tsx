@@ -7,6 +7,7 @@ import InputText from "../../components/formComponents/InputText";
 import InputSelect from "../../components/formComponents/InputSelect";
 import Validations from "../../../helpers/validations";
 import AnimalsList from "../components/AnimalsList";
+import { OptionObject } from "../../../types/types";
 
 export default function Register() {
 
@@ -17,7 +18,7 @@ export default function Register() {
     const [find_string, setFind_string] = useState("");
     const [animalsList, setAnimalsList] = useState<[] | undefined>();
 
-    const searchOptions = [
+    const searchOptions:OptionObject[] = [
         {"value":"code", "description":"Por código"},
         {"value":"nickname", "description":"Por nombre"},
         {"value":"certification_name", "description":"Por nombre de certificación"},

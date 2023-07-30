@@ -1,12 +1,5 @@
 import Constants from "../../../helpers/constants";
-
-interface Image {
-    animal_id: number,
-    title: string,
-    description: string,
-    image_name: string,
-    user_id: number
-}
+import { Image } from "../../../types/types";
 
 interface ImgCarouselProps{
     image: Image

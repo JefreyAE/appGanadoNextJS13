@@ -11,11 +11,8 @@ import Validations from "../../../helpers/validations";
 import Incident from "../../../models/incident";
 import IncidentsService from "../../../services/incidentsService";
 import ButtonsBar from "../../components/ButtonsBar";
+import { OptionObject } from "../../../types/types";
 
-type OptionObject = {
-    value: string | null | number
-    description: string | null
-}
 export default function Register() {
 
     const _animalService = new AnimalService()

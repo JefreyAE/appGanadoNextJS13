@@ -4,13 +4,9 @@ import AnimalService from "../../../services/animalService"
 import AnimalsList from "../components/AnimalsList"
 import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
-import SpinnerLoading from "../../components/SpinnerLoading"
 import ButtonsBar from "../../components/ButtonsBar"
+import { ButtonsObject } from "../../../types/types";
 
-type ButtonsObject = {
-  description: string
-  url: string
-}
 export default function All() {
 
   const [listAll, setList] = useState<[]>();

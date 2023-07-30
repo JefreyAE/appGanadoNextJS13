@@ -8,12 +8,7 @@ import InputPasswordWithLabel from "../../../components/formComponents/InputPass
 import Validations from "../../../../helpers/validations";
 import { validateFormInputs } from "../../../../helpers/validationsTool";
 import useAdminAuthorization from "../../../../hooks/useAdminAuthorization";
-
-type ValidationObject = {
-    type: string
-    name: string;
-    value: any
-}
+import { ValidationObject } from "../../../../types/types";
 
 export default function CreateUser() {
 

@@ -2,16 +2,10 @@
 import { useEffect, useState } from "react"
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
-import SalesList from "../components/SalesList";
 import SalesService from "../../../services/salesService";
 import TradesList from "../../components/TradesList";
 import ButtonsBar from "../../components/ButtonsBar";
-import SpinnerLoading from "../../components/SpinnerLoading";
-
-type ButtonsObject = {
-    description: string
-    url: string
-}
+import { ButtonsObject } from "../../../types/types";
 
 export default function Index(){
 

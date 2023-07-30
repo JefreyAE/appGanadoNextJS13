@@ -3,11 +3,8 @@ import React, { createContext, useEffect, useState } from "react";
 import User from "../models/user";
 import UserService from "../services/userService";
 import { validateJWT } from "../helpers/JWTTools";
-
-interface UserContextType {
-  userContext: User;
-  updateUser: (newUser: User) => void;
-}
+import { useRouter } from "next/navigation";
+import { UserContextType } from "../types/types";
 
 export const UserContext = createContext<UserContextType>({
   userContext: new User(null,"","","",null,null,null,null,null,null),
@@ -17,11 +14,15 @@ export const UserContext = createContext<UserContextType>({
 export default function UserProvider({children}: {children: React.ReactNode}) {
   const [userContext, setUser] = useState(new User(null,"","","",null,null,null,null,null,null));
   const _userService = new UserService()
+  const router = useRouter()
   
   useEffect(()=>{
-    validateJWT() && _userService.myProfile().
-            then((data) => {
+    validateJWT() && _userService.myProfile()
+            .then((data) => {
                 setUser(data.user)
+            })
+            .catch((e:any)=>{
+              router.push('/')
             })
   },[])
 

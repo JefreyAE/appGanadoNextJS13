@@ -8,21 +8,22 @@ import salesService from "../../../services/salesService";
 import { useEffect, useState } from "react";
 import SaleFormSection from "../components/SaleFormSection";
 import ButtonsBar from "../../components/ButtonsBar";
+
 export default function Register() {
 
-    let _animalService = new AnimalService();
-    let _saleService = new salesService();
+    const _animalService = new AnimalService();
+    const _saleService = new salesService();
 
     const [saleFormData, setSaleFormData] = useState<Sale | undefined>()
     const [isValidSaleFormData, setIsValidSaleFormData] = useState(true)
     const [animals, setAnimals] = useState<Animal[]>([])
     const [updateList, setUpdateList] = useState(true)
 
-    let getSaleFormData = (callback: ()=>Sale) => {
+    const getSaleFormData = (callback: ()=>Sale) => {
         setSaleFormData(callback());
     }
 
-    let saleValidationForm = (callback:()=>boolean) => {
+    const saleValidationForm = (callback:()=>boolean) => {
         setIsValidSaleFormData(callback())
     }
 

@@ -8,8 +8,7 @@ import SearchForm from "../../components/SearchForm"
 
 export default function Search() {
 
-    const _saleService = new SalesService();
-    
+    const _saleService = new SalesService();   
     const [saleList, setSalesList] = useState<[] | undefined>();
 
     const searchData = (date1:string, date2:string) => {    
