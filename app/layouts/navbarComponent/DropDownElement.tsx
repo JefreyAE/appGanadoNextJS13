@@ -15,7 +15,7 @@ export default function DropDownElement({ title, listElments, collapseNavbar }: 
             <ul className="dropdown-menu" aria-labelledby="/navbarDropdown">
                 {listElments && listElments.map((elementList: ListElements, key) => {
                         return (
-                            <li key={key}><Link onClick={collapseNavbar} className="dropdown-item" href={elementList.url}>{elementList.description}</Link></li>
+                            elementList.url && <li key={key}><Link onClick={collapseNavbar} className="dropdown-item" href={elementList.url}>{elementList.description}</Link></li>
                         )
                     })
                 }
