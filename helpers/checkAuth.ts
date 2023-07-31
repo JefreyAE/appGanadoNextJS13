@@ -12,7 +12,7 @@ export function checkAuth(){
     }
 
     const constants = new Constants()
-    const _sessionService = new SessionService();
+    const _sessionService = new SessionService()
 
     if (refreshTimeJWT()) {
         _sessionService.resfreshToken()

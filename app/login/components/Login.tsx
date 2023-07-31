@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import SpinnerLoading from '../../components/SpinnerLoading'
-import { deleteCookie, setCookie } from 'cookies-next';
+import { deleteCookie, setCookie } from 'cookies-next'
 import InputPasswordWithLabel from '../../components/formComponents/InputPasswordWithLabel'
 import UserService from '../../../services/userService'
 import Constants from '../../../helpers/constants'
@@ -12,6 +12,7 @@ import { UserContext } from '../../../contexts/userContext'
 import InputTextWithLabel from '../../components/formComponents/InputTextWithLabel'
 import { validateFormInputs } from '../../../helpers/validationsTool'
 import { ValidationObject } from '../../../types/types'
+import { getUserDataJWT } from '../../../helpers/JWTTools'
 
 interface State {
     message: string;
@@ -63,8 +64,9 @@ export default function Login() {
             _userService.login(email, password)
                 .then((data) => {
                     if (data.status === 'success') {
-                        setCookie('token', JSON.stringify(data.token), { maxAge: constants.getTokenExpirationTime() });
-                        updateUser(data.user)
+                        setCookie('token', JSON.stringify(data.token), { maxAge: constants.getTokenExpirationTime() });    
+                        let user = getUserDataJWT(data.token)
+                        updateUser(user)
                         router.push('/main')
                     } else {
                         setIsLoading(false)
@@ -73,6 +75,8 @@ export default function Login() {
                     }
                 })
                 .catch((error) => {
+                    console.log(error);
+                    
                     setIsLoading(false)
                     toast.error("A ocurrido un error al ingresar.", {
                         position: toast.POSITION.TOP_CENTER,

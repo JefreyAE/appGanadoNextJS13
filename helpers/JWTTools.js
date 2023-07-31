@@ -32,7 +32,6 @@ function refreshTimeJWT() {
         try {
             const decodedPayload = JSON.parse(atob(payload));
             const currentTime = Math.floor(Date.now() / 1000); // Obtiene la fecha actual en segundos
-
             if (decodedPayload.exp && decodedPayload.exp >= currentTime) {
                 let isTime = (decodedPayload.exp - currentTime) < tokenExpTime/2;
                 return isTime;
@@ -48,4 +47,11 @@ function refreshTimeJWT() {
     }
 }
 
-export { validateJWT, refreshTimeJWT };
+function getUserDataJWT(token){
+    const [header, payload, signature] = token.split('.');
+    const decodedPayload = JSON.parse(atob(payload));
+    return decodedPayload
+}
+
+export { validateJWT, refreshTimeJWT, getUserDataJWT };
+
