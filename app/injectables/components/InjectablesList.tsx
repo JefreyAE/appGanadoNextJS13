@@ -4,13 +4,17 @@ import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
 
 interface InjectablesListProps {
-    injectables: Injectable[]
+    injectables: any[]
     deleteInjectable?: (creation_time: number, animal_id: number) => void
+    deleteAllInjectables?: (creation_time: number) => void
 }
 
-export default function InjectablesList({ injectables, deleteInjectable }: InjectablesListProps) {
+export default function InjectablesList({ injectables, deleteInjectable, deleteAllInjectables }: InjectablesListProps) {
     const deleteRegister = (injectable:Injectable)=>{   
         deleteInjectable && injectable.id && injectable.creation_time && injectable.animal && deleteInjectable(injectable.creation_time, injectable.animal.id)
+    }
+    const deleteAllRegisters = (injectable:Injectable)=>{   
+        deleteAllInjectables && injectable.id && injectable.creation_time && deleteAllInjectables(injectable.creation_time)
     }
     return (
         <section className="frontend row">
@@ -40,8 +44,11 @@ export default function InjectablesList({ injectables, deleteInjectable }: Injec
                                 <td>
                                     <Link className="btn btn-sm btn-info buttonsTable" href={`/injectables/detail/${injectable.creation_time}`}>Detalle</Link>
                                 </td>
-                                {deleteInjectable && <td>
+                                {deleteInjectable && injectable.creation_time_count === 1 && <td>
                                     <button id="btnDeleteRegister" className="btn btn-sm btn-danger buttonsTable" onClick={e => deleteRegister(injectable)}>Borrar</button>
+                                </td>}
+                                {deleteInjectable && injectable.creation_time_count > 1 && <td>
+                                    <button id="btnDeleteRegister" className="btn btn-sm btn-danger buttonsTable" onClick={e => deleteAllRegisters(injectable)}>Borrar</button>
                                 </td>}
                             </tr>)
                         )}

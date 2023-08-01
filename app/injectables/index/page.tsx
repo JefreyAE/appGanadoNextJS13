@@ -20,11 +20,17 @@ export default function Index() {
     }, [, updateList])
 
     const delete_injectable = (creation_time: number, animal_id: number) => {
-
         const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este registro?");
-
         if (confirmDelete) {
             _injectablesService.delete(creation_time, animal_id)
+                .finally(() => { setUpdateList(updateList ? false : true) })
+        }
+    }
+
+    const delete_all_injectables = (creation_time: number) => {
+        const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este registro?");
+        if (confirmDelete) {
+            _injectablesService.deleteAll(creation_time)
                 .finally(() => { setUpdateList(updateList ? false : true) })
         }
     }
@@ -36,7 +42,7 @@ export default function Index() {
     return (
         <>  
             <ButtonsBar buttons={buttons} />
-            {listIndex && <InjectablesList injectables={listIndex} deleteInjectable={delete_injectable} /> }
+            {listIndex && <InjectablesList injectables={listIndex} deleteInjectable={delete_injectable} deleteAllInjectables={delete_all_injectables} /> }
         </>
     );
 
