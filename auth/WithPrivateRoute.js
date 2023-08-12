@@ -13,7 +13,6 @@ const WithPrivateRoute = ({ children }) => {
     const { isValid, setToken } = useValidateJWT(tokenCookie)
 
     useEffect(() => {   
-        console.log(`${getCookie('token')}`);
         setToken(`${getCookie('token')}`)    
         if (pathname === '/' || pathname === '/login') {
             setShow(true)

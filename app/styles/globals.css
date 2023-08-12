@@ -1497,7 +1497,7 @@ body #container-all {
 }
 
 .modal-post .carousel-item img {
-    max-height: 800px;
+    max-height: 700px;
     -o-object-fit: contain;
     object-fit: contain;
     min-height: 400px;
