@@ -14,7 +14,6 @@ export default function UserDropDown({collapseNavbar}:UserDropDownProps) {
 
     const router = useRouter()
     const { userContext } = useContext(UserContext)
-
     const constants = new Constants();
     
     const logOut = (e:any) => {
@@ -28,7 +27,7 @@ export default function UserDropDown({collapseNavbar}:UserDropDownProps) {
       
     return (
         <>
-            <li className="nav-item dropdown" >
+            <li className="nav-item dropdown nav-item-custom" >
                 <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cuenta</a>
                 <ul className="dropdown-menu" id="user-dropdown-account" aria-labelledby="navbarDropdown">
                     <li><Link onClick={collapseNavbar} className="dropdown-item" href="/users/profile">Mi perfil</Link></li>
@@ -46,7 +45,6 @@ export default function UserDropDown({collapseNavbar}:UserDropDownProps) {
                         <img id="img-logo" src="/images/logoUser.jpg" alt="" />}
                 </div>
             </li>
-
         </>
     )
 }

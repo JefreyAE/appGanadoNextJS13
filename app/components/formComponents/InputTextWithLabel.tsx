@@ -20,7 +20,7 @@ export default function InputTextWithLabel({setData, entity, title, name, isDisa
     return (
         <>
             <div className="mb-3">
-                <label className="form-label" htmlFor="passwordCurrent">{title}</label>
+                <label className="form-label">{title}</label>
                 <div>
                     <input className="form-control" onChange={(e) => { setData(e.target.value) }} id={name} name={name} type={type} autoComplete={autoComplete} defaultValue={defaultValue} disabled={isDisabled} placeholder={placeholder} required={isRequired}/>
                 </div>

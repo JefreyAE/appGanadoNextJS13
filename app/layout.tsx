@@ -1,7 +1,7 @@
+
 import Script from 'next/script'
 import './styles/globals.css'
 import { Inter } from 'next/font/google'
-import Footer from './layouts/footerComponent/Footer'
 import  UserProvider from '../contexts/userContext'
 import CentralContainer from './layouts/containersComponent/CentralContainer'
 import { Metadata } from 'next'
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children, }: { children: React.ReactNode }) {
   return (
-      <html lang="en">
+      <html lang="en" >
         <head> 
           <link rel="icon" href="favicon/favicon.ico" />
           <Script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" crossOrigin="anonymous" defer></Script>
@@ -52,7 +52,6 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
               </UserProvider>
             </div>
           </div>
-          <Footer/>
         </body>
       </html>
   )

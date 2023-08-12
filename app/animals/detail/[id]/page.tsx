@@ -14,6 +14,8 @@ import OffSpringsTable from "../../components/OffSpringsTable";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ButtonsBar from "../../../components/ButtonsBar";
+import { ButtonsObject } from "../../../../types/types";
+import 'react-toastify/dist/ReactToastify.css';
 
 interface DetailProps {
     params: any
@@ -27,10 +29,10 @@ export default function AnimalPageDetail({ params }: DetailProps) {
     const [injectables, setInjectables] = useState([]);
     const [offsprings, setOffsprings] = useState([]);
     const [imagesUpdate, setImagesUpdated] = useState(true);
+    const [showCarrousel, setShowCarrousel ] = useState(true)
 
     const [listImages, setListImages] = useState();
-
-    let _animalService = new AnimalService();
+    const _animalService = new AnimalService();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -65,26 +67,30 @@ export default function AnimalPageDetail({ params }: DetailProps) {
 
 
     const imageUploaded = ()=>{
-        setImagesUpdated(imagesUpdate ? false : true)
+        setImagesUpdated(!imagesUpdate)
     }
 
-    const delete_image = (image_name: string, animal_id: number, user_id:number) => {
+    const delete_image = (image_name: string, user_id:number) => {
         const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar esta imagen?");
 
         if (confirmDelete) {
-            _animalService.deleteImage(image_name, animal_id, user_id)
+            _animalService.deleteImage(image_name, user_id)
                 .finally(() => {
-                    setImagesUpdated(imagesUpdate ? false : true)
+                    setImagesUpdated(!imagesUpdate)
                 })
         }
     }
 
+    const buttons: ButtonsObject[] = [
+        {description: 'Registrar animal', url: "/animals/register"},
+        {description: 'Crear publicación', url: `/posts/animals/register/${params.id}`}
+    ]
     return (
         <>
-            <ButtonsBar />
+            <ButtonsBar buttons={buttons} />
             <div className="row mt-4 justify-content-center">
                 <div className="col-md-7">
-                    {listImages && <Carousel listImages={listImages} delete_image={delete_image}/>}     
+                    {listImages && showCarrousel && <Carousel resourceUrl="/api/animals/image/" listImages={listImages} delete_image={delete_image}/>}     
                     <UploadImage animal_id={params.id} imageUploaded={imageUploaded}/>                  
                 </div>
             </div>

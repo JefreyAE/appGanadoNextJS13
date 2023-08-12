@@ -1,5 +1,37 @@
+'use client'
 import { getCookie } from 'cookies-next'
 import Constants from './constants';
+import { useEffect, useState } from 'react';
+
+function useValidateJWT(tokenCookie){
+    const [token, setToken] = useState(tokenCookie)
+    const [isValid, setIsValid] = useState(true)
+    useEffect(()=>{
+        if (token) {
+            const [header, payload, signature] = token.split('.');
+            try {
+                const decodedPayload = JSON.parse(atob(payload));
+                const currentTime = Math.floor(Date.now() / 1000);
+                if (decodedPayload.exp && decodedPayload.exp >= currentTime) {
+                    setIsValid(true);
+                } else {
+                    setIsValid(false);
+                }
+            } catch (error) {
+                console.error('Error al decodificar el payload del token:', error);
+                setIsValid(false);
+            }
+        } else {
+            setIsValid(false);
+        }
+    },[,token])
+   
+    return{
+        isValid,
+        setToken
+    }
+}
+
 function validateJWT() {
     const token = `${getCookie('token')}`; 
     if (token) {
@@ -53,5 +85,5 @@ function getUserDataJWT(token){
     return decodedPayload
 }
 
-export { validateJWT, refreshTimeJWT, getUserDataJWT };
+export { validateJWT, refreshTimeJWT, getUserDataJWT, useValidateJWT };
 

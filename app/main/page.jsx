@@ -1,6 +1,6 @@
-import Page from '../notifications/index/page'
+import Posts from '../posts/animals/index/page'
 export default function Main(){
     return (
-        <Page />
+        <Posts />
     )
 }

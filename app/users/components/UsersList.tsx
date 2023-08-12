@@ -42,12 +42,7 @@ export default function UsersList({title, list, deleteUser}: UsersListProps) {
                                         <td>{user.phone_number && user.phone_number}</td>
                                         <td>{user.state && userStates[user.state]}</td>
                                         <td>
-                                            <Link
-                                                className="btn btn-sm btn-info"
-                                                href={'/users/admin/user/' + user.id}
-                                            >
-                                                Administrar
-                                            </Link>
+                                            <Link className="btn btn-sm btn-info" href={'/users/admin/user/' + user.id}>Administrar</Link>
                                         </td>
                                         {deleteUser && <td><button className="btn btn-danger btn-padding-sm" onClick={e => user.id && deleteUser(user.id)}>Borrar</button></td>}
                                     </tr>

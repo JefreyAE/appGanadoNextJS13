@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useRef, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useRouter } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -45,14 +45,7 @@ export default function Login() {
         password && password !== '' && validateFormInputs(inputs)
     }, [password])
 
-    const styleNone = {
-        "display": "none"
-    }
-    const styleShow = {
-        "display": "block"
-    }
-
-    const loguear = (e: React.FormEvent) => {
+    const loguear = async (e: React.FormEvent) => {
         e.preventDefault();
 
         const inputs: ValidationObject[] = [
@@ -61,62 +54,59 @@ export default function Login() {
 
         if (validateFormInputs(inputs)) {
             setIsLoading(true);
-            _userService.login(email, password)
-                .then((data) => {
-                    if (data.status === 'success') {
-                        setCookie('token', JSON.stringify(data.token), { maxAge: constants.getTokenExpirationTime() });    
-                        let user = getUserDataJWT(data.token)
-                        updateUser(user)
-                        router.push('/main')
-                    } else {
-                        setIsLoading(false)
-                        setState((prevState) => ({ ...prevState, message: data.message }));
-                        deleteCookie('token')
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                    
+            try {
+                const data = await _userService.login(email, password);
+                  
+                if (data.status === 'success') {
+                    setCookie('token', JSON.stringify(data.token), { maxAge: constants.getTokenExpirationTime() })
+                    let user = getUserDataJWT(data.token)
+                    updateUser(user)
+                    router.push('/main')          
+                } else {
                     setIsLoading(false)
-                    toast.error("A ocurrido un error al ingresar.", {
-                        position: toast.POSITION.TOP_CENTER,
-                        autoClose: 3000,
-                    });
+                    setState((prevState) => ({...prevState, message: data.message }))
+                    deleteCookie('token')
+                }
+            } catch (error) {
+                console.log(error);
+                setIsLoading(false)
+                toast.error("Ha ocurrido un error al ingresar.", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 3000,
                 });
+            }
         }
     }
-
-    return (
-        <>
-            <div className="form col-lg-4" id='formLogin' style={isLoading ? styleNone : styleShow}>
-                <h2>Ingrese sus credenciales</h2>
-                <form onSubmit={loguear} id="formLog">
-                    <InputTextWithLabel
-                        title='Correo Electrónico:'
-                        type='email'
-                        name='email'
-                        placeholder='@'
-                        setData={setEmail}
-                        defaultValue=""
-                        isRequired={true}
-                    />
-                    <InputPasswordWithLabel
-                        title="Contraseña:"
-                        setData={setPassword}
-                        name="password"
-                        placeholder=""
-                        autoComplete="new-password"
-                    />
-                    {state.message != "" &&
-                        <div className='error'>{state.message}</div>
-                    }
-                    <button type="submit" className="large green button-login mt-3 mb-3" id="btnLogin" >Ingresar</button>
-                </form>
-            </div>
-            <ToastContainer />
-            <div style={!isLoading ? styleNone : styleShow}>
-                <SpinnerLoading />
-            </div>
-        </>
-    )
+        return (
+            <>
+                {!isLoading && <div className="form col-lg-4" id='formLogin'>
+                    <h2>Ingrese sus credenciales</h2>
+                    <form onSubmit={loguear} id="formLog">
+                        <InputTextWithLabel
+                            title='Correo Electrónico:'
+                            type='email'
+                            name='email'
+                            placeholder='@'
+                            setData={setEmail}
+                            defaultValue=""
+                            isRequired={true}
+                        />
+                        <InputPasswordWithLabel
+                            title="Contraseña:"
+                            setData={setPassword}
+                            name="password"
+                            placeholder=""
+                            autoComplete="new-password"
+                        />
+                        {state.message != "" &&
+                            <div className='error'>{state.message}</div>
+                        }
+                        <button type="submit" className="large green button-login mt-3 mb-3" id="btnLogin" >Ingresar</button>
+                    </form>
+                </div>}
+                <ToastContainer />
+                {isLoading && <SpinnerLoading />}
+            </>
+        )
+    
 }

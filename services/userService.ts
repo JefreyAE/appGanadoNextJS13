@@ -88,7 +88,7 @@ export default class UserService {
 
     uploadAvatarProfile(formData:any){
         checkAuth()
-        return this.customFetch.postImage(this.url+"/api/user/upload/avatar",formData,{},{Authorization: this.token})
+        return this.customFetch.postWithImagesFiles(this.url+"/api/user/upload/avatar",formData,{},{Authorization: this.token})
         .then(handleResponse)
         .then(handleDataStatus)
         .catch(handleError);

@@ -10,3 +10,12 @@ export const ROLES = {
     '2': 'Usuario',
     '3': 'Cuenta Demo',
 } as { [key: string]: string};
+
+export function getROLE(value:String): string | undefined {
+  for (const key in ROLES) {
+    if (ROLES.hasOwnProperty(key) && ROLES[key] === value) {
+      return key;
+    }
+  }
+  return undefined;
+}

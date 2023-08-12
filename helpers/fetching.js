@@ -18,7 +18,7 @@ export default class CustomFetch {
     return fetch(url, requestOptions);
   }
 
-  postImage(url, params, options = {}, headerOptions = {}) {
+  postWithImagesFiles(url, params, options = {}, headerOptions = {}) {
 
     const requestOptions = {
       method: 'POST',

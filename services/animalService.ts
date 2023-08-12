@@ -79,9 +79,9 @@ export default class AnimalService{
         .catch(handleError);
     }
 
-    deleteImage(image_name:string,animal_id:number,user_id:number){
+    deleteImage(image_name:string,user_id:number){
         checkAuth()
-        return this.customFetch.delete(`${this.url}/api/animals/deleteImage/${image_name}/${animal_id}/${user_id}`,{},{Authorization: this.token})
+        return this.customFetch.delete(`${this.url}/api/animals/deleteImage/${image_name}/${user_id}`,{},{Authorization: this.token})
         .then(handleResponse)
         .then(handleDataStatus)
         .catch(handleError);
@@ -89,7 +89,7 @@ export default class AnimalService{
 
     uploadImage(formData:any){
         checkAuth()
-        return this.customFetch.postImage(this.url+"/api/animals/upload",formData,{},{Authorization: this.token})
+        return this.customFetch.postWithImagesFiles(this.url+"/api/animals/upload",formData,{},{Authorization: this.token})
         .then(handleResponse)
         .then(handleDataStatus)
         .catch(handleError);

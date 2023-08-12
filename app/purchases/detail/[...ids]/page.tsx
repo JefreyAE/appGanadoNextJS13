@@ -27,14 +27,6 @@ export default function PurchasePageDetail({ params }: DetailProps) {
     const _animalService = new AnimalService()
     const _purchaseService = new PurchasesService()
 
-    const showElement = {
-        "display":"block"
-    }
-
-    const hideElement = {
-        "display":"none"
-    }
-
     useEffect(() => {
         const getData = async () => {
             const purchaseData = await _purchaseService.detail(params.ids[1])
@@ -47,7 +39,7 @@ export default function PurchasePageDetail({ params }: DetailProps) {
             const imagesData = await _animalService.getImages(params.ids[0]);
             imagesData && setListImages(imagesData.images_list);
         }
-        fetchData();  
+        fetchData()
 
     }, [params.ids, updateTrigger])
 
@@ -76,7 +68,7 @@ export default function PurchasePageDetail({ params }: DetailProps) {
     }
 
     const showUpdateForm = () => {
-        setIsVisible(isVisible?false:true)
+        setIsVisible(!isVisible)
     }
 
     return (
@@ -84,14 +76,12 @@ export default function PurchasePageDetail({ params }: DetailProps) {
             <ButtonsBar />
             <div className="row mt-4 justify-content-center">
                 <div className="col-md-7">
-                    {animal && <Carousel listImages={listImages} />}
+                    {animal && <Carousel resourceUrl="/api/animals/image/" listImages={listImages} />}
                 </div>
             </div>
-            <div  style={isVisible ? showElement : hideElement}>
-                <PurchaseInfo animal={animal} purchase={purchase}/>
-            </div> 
-            <button className="btn btn-primary btn-md btn-block mt-3" onClick={showUpdateForm} id="btnEnableForm" style={isVisible ? showElement : hideElement}>Habilitar actualización de datos</button>
-            <section className="frontend row justify-content-center" style={!isVisible ? showElement : hideElement} >
+            {isVisible && <PurchaseInfo animal={animal} purchase={purchase}/>}
+            {isVisible  && <button className="btn btn-primary btn-md btn-block mt-3" onClick={showUpdateForm} id="btnEnableForm" >Habilitar actualización de datos</button>}
+            {!isVisible && <section className="frontend row justify-content-center">
                 <h1 className="titulo col-md-12">Actualización de datos de la compra</h1>
                 <div className="form col-lg-12" id='formDetailAnimal'>
                     <form id="form-detail-update" onSubmit={purchaseFunction} className="form_data form-group row">
@@ -105,7 +95,7 @@ export default function PurchasePageDetail({ params }: DetailProps) {
                         />}
                     </form>            
                 </div>
-            </section>
+            </section>}
             <ToastContainer />
         </>
     );

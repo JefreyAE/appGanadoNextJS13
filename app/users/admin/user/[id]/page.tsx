@@ -13,6 +13,7 @@ import { ROLES, userStates } from '../../../../../helpers/enums'
 import { useRouter } from 'next/navigation'
 import useAdminAuthorization from '../../../../../hooks/useAdminAuthorization'
 import { OptionObject } from '../../../../../types/types'
+import ButtonsBar from '../../../../components/ButtonsBar'
 interface UserProfileProps {
     params: any
 }
@@ -24,15 +25,15 @@ export default function UserProfileAdmin({ params }: UserProfileProps) {
     const { userContext } = useContext(UserContext)
     useAdminAuthorization(true)
     const _userService = new UserService()
-    const [ user, setUser ] = useState<User>()
+    const [user, setUser] = useState<User>()
 
     const [state, setState] = useState()
     const [role, setRole] = useState()
 
     useEffect(() => {
         _userService.getProfile(params.id).
-            then((data) => { 
-                if(userContext.role !== '1'){
+            then((data) => {
+                if (userContext.role !== '1') {
                     toast.error("No cuenta con permisos suficientes para realizar esta acción", {
                         position: toast.POSITION.TOP_CENTER,
                         autoClose: 3000,
@@ -51,8 +52,8 @@ export default function UserProfileAdmin({ params }: UserProfileProps) {
 
     const update = (e: React.FormEvent) => {
         e.preventDefault()
-        const updatedData = {id: user?.id, state: state, role: role}
-        _userService.updateUser(updatedData)    
+        const updatedData = { id: user?.id, state: state, role: role }
+        _userService.updateUser(updatedData)
     }
 
     const stateOptions: OptionObject[] = [
@@ -69,36 +70,39 @@ export default function UserProfileAdmin({ params }: UserProfileProps) {
     ]
 
     return (
-        <div className="col-md-12 row justify-content-center">
-            {user && <ProfileCard isUserOwner={user.id === userContext.id} user={user} />}
-            {user && <div className="col-md-12 row justify-content-center">
-                <section className="frontend row justify-content-center col-md-8">
-                    <h1 className="titulo col-md-12">Actualización de datos de la cuenta</h1>
-                    <div className="form col-md-10" id='formUpdateUser'>
-                        <form onSubmit={update} autoComplete="nope" className="form_data mt-2">
-                            <InputSelect
-                                title="Estado de la cuenta"
-                                setData={setState}
-                                name="state"
-                                entity={user}
-                                options={stateOptions}
-                                defaultValue={user.state}
-                            />
-                            <InputSelect
-                                title="Role del usuario &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                                setData={setRole}
-                                name="state"
-                                entity={user}
-                                options={roleOptions}
-                                defaultValue={user.role}
-                            />
-                            <button type="submit" className="large green button-login mt-3 mb-3" id="btnLogin" >Actualizar datos</button>
-                        </form>
-                    </div>
-                </section>
+        <>        
+            <ButtonsBar />
+            <div className="col-md-12 row justify-content-center">
+                {user && <ProfileCard isUserOwner={user.id === userContext.id} user={user} />}
+                {user && <div className="col-md-12 row justify-content-center">
+                    <section className="frontend row justify-content-center col-md-8">
+                        <h1 className="titulo col-md-12">Actualización de datos de la cuenta</h1>
+                        <div className="form col-md-10" id='formUpdateUser'>
+                            <form onSubmit={update} autoComplete="nope" className="form_data mt-2">
+                                <InputSelect
+                                    title="Estado de la cuenta"
+                                    setData={setState}
+                                    name="state"
+                                    entity={user}
+                                    options={stateOptions}
+                                    defaultValue={user.state}
+                                />
+                                <InputSelect
+                                    title="Role del usuario &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                                    setData={setRole}
+                                    name="state"
+                                    entity={user}
+                                    options={roleOptions}
+                                    defaultValue={user.role}
+                                />
+                                <button type="submit" className="large green button-login mt-3 mb-3" id="btnLogin" >Actualizar datos</button>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+                }
+                <ToastContainer />
             </div>
-            }
-            <ToastContainer />
-        </div>
+        </>
     )
 }

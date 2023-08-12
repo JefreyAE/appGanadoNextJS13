@@ -10,6 +10,7 @@ import { setCookie } from "cookies-next";
 import Constants from "../../../helpers/constants";
 import { validateFormInputs } from "../../../helpers/validationsTool";
 import { ValidationObject } from "../../../types/types";
+import ButtonsBar from "../../components/ButtonsBar";
 
 export default function EditProfile() {
 
@@ -30,6 +31,18 @@ export default function EditProfile() {
                 setUser(data.user)
             })
     }, [])
+
+    useEffect(() => {
+        const inputs:ValidationObject[] = [
+            {type: "alfanumerico", name:"surname", value:surname},
+            {type: "alfanumerico", name:"name", value:name},
+            {type: "passwordLogin", name:"password", value:password},
+            {type: "email", name:"email", value:email},
+            {type: "email", name:"contact_email", value:contact_email},
+            {type: "alfanumerico", name:"phone_number", value:phone_number},
+        ]
+        validateFormInputs(inputs)  
+    }, [name, surname, email, password, contact_email, phone_number])
 
     const update = (e: React.FormEvent) => {
         e.preventDefault()
@@ -58,20 +71,9 @@ export default function EditProfile() {
         }
     }
 
-    useEffect(() => {
-        const inputs:ValidationObject[] = [
-            {type: "alfanumerico", name:"surname", value:surname},
-            {type: "alfanumerico", name:"name", value:name},
-            {type: "passwordLogin", name:"password", value:password},
-            {type: "email", name:"email", value:email},
-            {type: "email", name:"contact_email", value:contact_email},
-            {type: "alfanumerico", name:"phone_number", value:phone_number},
-        ]
-        validateFormInputs(inputs)  
-    }, [name, surname, email, password, contact_email, phone_number])
-
-
     return (
+        <>
+        <ButtonsBar />
         <div className="col-md-12 row justify-content-center">
             <section className="frontend row justify-content-center col-md-8">
                 <h1 className="titulo col-md-12">Actualización de datos de la cuenta</h1>
@@ -126,5 +128,6 @@ export default function EditProfile() {
                 <ToastContainer />
             </section>
         </div>
+        </>
     )
 }

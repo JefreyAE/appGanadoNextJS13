@@ -15,35 +15,29 @@ export default function Navbar({ isVisibleProp = true }: NavbarProps) {
     const pathname = usePathname()
     const [navbarCollapseStyle, setNavbarCollapseStyle] = useState("collapse navbar-collapse")
    
-    const hideNav = {
-        "display": "none"
-    }
-    const showNav = {
-        "display": "block"
-    }
-
     const showNavbarCollapsed = "collapse navbar-collapse show";
     const hideNavbarCollapsed = "collapse navbar-collapse";
-    const updateToggle = ()=>{
-        setNavbarCollapseStyle(navbarCollapseStyle === hideNavbarCollapsed ?  showNavbarCollapsed : hideNavbarCollapsed)
-    }
 
     const collapseMenu = ()=>{
         setNavbarCollapseStyle(navbarCollapseStyle === hideNavbarCollapsed ?  showNavbarCollapsed : hideNavbarCollapsed)
     }
 
+    const closeMenu = ()=>{
+        //setNavbarCollapseStyle( hideNavbarCollapsed)
+    }
+
     return (
         <>
-            {pathname !== '/' && <header id="header" className="col-md-12" style={isVisibleProp ? showNav : hideNav}>
-                <nav id="nav-1" className="navbar navbar-expand-xl navbar-dark bg-dark">
+            {pathname !== '/' && isVisibleProp && <header id="header" className="col-md-12">
+                <nav id="nav-1" className="navbar navbar-expand-xl navbar-dark bg-dark" onMouseLeave={closeMenu}>
                     <div className="container-fluid">
-                        <button className="navbar-toggler" onClick={updateToggle} type="button" data-toggle="collapse" 
+                        <button className="navbar-toggler" onClick={collapseMenu} type="button" data-toggle="collapse" 
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className={navbarCollapseStyle} id="navbarSupportedContent">
                             <ul className="navbar-nav mr-auto nav-home-icon">
-                                <li className="nav-item active">
+                                <li className="nav-item nav-item-home nav-item-custom active">
                                     <Link className="nav-link " href="/main" aria-current="page"><span className="fa-solid fa-house"></span></Link>
                                 </li>
                             </ul>

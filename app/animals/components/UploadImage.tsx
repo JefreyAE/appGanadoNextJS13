@@ -5,18 +5,18 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function UploadImage(props: any) {
 
-    let _animalService = new AnimalService();
+    const _animalService = new AnimalService();
 
-    let uploadImageSub = (e: any) => {
+    const uploadImageSub = (e: any) => {
         e.preventDefault();
-        var uploadImagex = document.getElementById('uploadImage') as HTMLFormElement;;
+        const uploadImagex = document.getElementById('uploadImage') as HTMLFormElement;;
 
-        var cargando = document.getElementById("cargando");
+        const cargando = document.getElementById("cargando");
         if (cargando != null) {
             cargando.style.display = 'block';
 
             if (uploadImagex != null) {
-                let dt = new FormData(uploadImagex);           
+                const dt = new FormData(uploadImagex);           
                 _animalService.uploadImage(dt)
                     .finally(() => {
                         if (cargando != null) {
@@ -28,8 +28,8 @@ export default function UploadImage(props: any) {
         }
     }
 
-    let showUploadForm = (e: any) => {
-        let colapse = document.getElementById('collapseOne');
+    const showUploadForm = (e: any) => {
+        const colapse = document.getElementById('collapseOne');
         colapse ? colapse.style.display === 'block' ? colapse.style.display = 'none' : colapse.style.display = 'block' : '';
     }
 
@@ -49,7 +49,7 @@ export default function UploadImage(props: any) {
                             <form className="form-data" id="uploadImage" onSubmit={uploadImageSub} encType="multipart/form-data">
                                 <div className="mb-2">
                                     <label className="form-label" htmlFor="title">Titulo:</label>
-                                    <input type="text" className="form-control" name="title" id="title" pattern="[A-Za-z0-9\s/-]+" title="No se adminten caracteres especiales" required />
+                                    <input type="text" className="form-control" name="title" id="title" title="No se adminten caracteres especiales" required />
                                 </div>
                                 <div className="mb-2">
                                     <label className="form-label" htmlFor="description">Descripción:</label>
@@ -59,7 +59,7 @@ export default function UploadImage(props: any) {
                                     <label className="form-label" htmlFor="file0">Selecciona una imagen:</label>
                                     <input type="file" className="form-control" name="file0" id="file0" required />
                                     <input type="hidden" name="animal_id" id="animal_id" value={props.animal_id || ''} />
-                                    <input className="btn btn-success" type="submit" value="Subir imagen" />
+                                    <input className="btn btn-success btn-block  mt-2" type="submit" value="Subir imagen" />
                                 </div>
                                 <div id="cargando" style={{ display: 'none' }}>
                                     <div className="d-flex justify-content-center">

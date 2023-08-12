@@ -35,7 +35,6 @@ export default function InputPasswordWithLabel({setData, entity, title, name, is
                     <input className="form-control" onBlur={onBlur} onChange={(e) => { setData(e.target.value) }} defaultValue={value} id={name} autoComplete={autoComplete} name={name} type={type} disabled={isDisabled} placeholder={placeholder} required/>
                     <i className={eyeClass} id="eye" onClick={toggleEye}></i>
                 </div>
-    
             </div>
         </>
     )

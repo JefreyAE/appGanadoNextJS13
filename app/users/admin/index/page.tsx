@@ -42,7 +42,6 @@ export default function Index() {
                     <ButtonsBar buttons={buttons} />
                     <UsersList list={listIndex} title="Lista de usuarios registrados" deleteUser={deleteUser}/>   
                 </>)
-
             } 
             <ToastContainer/>          
         </>

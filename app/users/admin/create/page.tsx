@@ -9,6 +9,7 @@ import Validations from "../../../../helpers/validations";
 import { validateFormInputs } from "../../../../helpers/validationsTool";
 import useAdminAuthorization from "../../../../hooks/useAdminAuthorization";
 import { ValidationObject } from "../../../../types/types";
+import ButtonsBar from "../../../components/ButtonsBar";
 
 export default function CreateUser() {
 
@@ -54,6 +55,7 @@ export default function CreateUser() {
 
     return (
         <>
+            <ButtonsBar />
             <section className="frontend row justify-content-center">
                 <h1 className="titulo col-md-12">Registrar nuevo usuario</h1>
                 <div className="form col-lg-8" >

@@ -18,7 +18,7 @@ export default function UserProvider({children}: {children: React.ReactNode}) {
   
   useEffect(()=>{
     validateJWT() && _userService.myProfile()
-            .then((data) => {
+            .then((data) => {  
                 setUser(data.user)
             })
             .catch((e:any)=>{

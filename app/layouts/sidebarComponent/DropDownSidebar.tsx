@@ -20,22 +20,27 @@ export default function DropDownSidebar({ title, listElments }: DropDownElementP
 
     const toggleSubmenu = (e:any) => {
         e.stopPropagation()
-        setIsVisible(isVisible ? false : true)
+        setIsVisible(!isVisible)
     }
 
     return (
         <li onClick={toggleSubmenu}>
-            <span className="sidebar-item-title"><span className={`ml-2 mr-2 ${!isVisible ? 'fa-solid fa-chevron-right' : 'fa-solid fa-chevron-down'}`} />{title} </span>
+            <span className="sidebar-item-title"><span className={`ml-3 mr-2 ${!isVisible ? 'fa-solid fa-chevron-right' : 'fa-solid fa-chevron-down'}`} />{title} </span>
             <ul className="sub-menu" style={isVisible ? show : hidde}>
-            {listElments && listElments.map((elementList: ListElements, key) => {
-                        const handleItemClick = (e:any) => {
-                            e.stopPropagation(); 
-                          };
-                        return (
-                            elementList.url && <li className="ml-5" key={key}><Link onClick={handleItemClick} href={elementList.url}>{elementList.description}</Link></li>
-                        )
-                    })
-                }
+                {listElments && listElments.map((elementList: ListElements, key) => {
+                            const handleItemClick = (e:any) => {
+                                e.stopPropagation(); 
+                            };
+                            return (
+                                elementList.url && 
+                                <li className="" key={key}>
+                                    <div className="side-a-container">
+                                        <Link onClick={handleItemClick} href={elementList.url}>{elementList.description}</Link>
+                                    </div>
+                                </li>
+                            )
+                        })
+                    }
             </ul>
         </li>
     )
