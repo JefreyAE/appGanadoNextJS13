@@ -55,8 +55,7 @@ export default function Login() {
         if (validateFormInputs(inputs)) {
             setIsLoading(true);
             try {
-                const data = await _userService.login(email, password);
-                  
+                const data = await _userService.login(email, password);     
                 if (data.status === 'success') {
                     setCookie('token', JSON.stringify(data.token), { maxAge: constants.getTokenExpirationTime() })
                     let user = getUserDataJWT(data.token)
@@ -88,7 +87,6 @@ export default function Login() {
                             name='email'
                             placeholder='@'
                             setData={setEmail}
-                            defaultValue=""
                             isRequired={true}
                         />
                         <InputPasswordWithLabel
