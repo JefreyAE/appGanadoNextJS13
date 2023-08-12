@@ -86,7 +86,7 @@ export default function SalePageDetail({ params }: DetailProps) {
             <ButtonsBar />
             <div className="row mt-4 justify-content-center">
                 <div className="col-md-7">
-                    {animal && <Carousel listImages={listImages} />}
+                    {animal && <Carousel resourceUrl="/api/animals/image/" listImages={listImages} />}
                 </div>
             </div>
             <div style={isVisible ? showElement : hideElement}>
