@@ -40,6 +40,9 @@ export default function NotificationsDropDown({ collapseNavbar }: NotificationsD
                             <div className="dropdown-divider"></div>
                         </>
                     ))}
+                    <li className='notification-li'>
+                        <Link href={`/notifications/all/`}>Administrar notificaciones</Link>
+                    </li>
                 </ul>
             </li>
         </>
