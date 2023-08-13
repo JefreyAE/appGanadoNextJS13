@@ -1,9 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import Constants from '../../../helpers/constants'
-import { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../../../contexts/userContext'
+import { useEffect, useState } from 'react'
 import NotificationsService from '../../../services/notificationsService'
 import { formatDate } from '../../../helpers/datesFormats'
 
@@ -13,19 +10,13 @@ interface NotificationsDropDownProps {
 
 export default function NotificationsDropDown({ collapseNavbar }: NotificationsDropDownProps) {
 
-    const router = useRouter()
-    const { userContext } = useContext(UserContext)
-    const constants = new Constants();
-
     const [listIndex, setListIndex] = useState<[]>()
     const _notificationService = new NotificationsService()
-    const [isUpdated, setIsUpdated] = useState(false)
 
     useEffect(() => {
         _notificationService.index()
             .then((data) => {
                 data && setListIndex(data.listActive)
-                data && console.log(data)
             })
     }, [])
 
