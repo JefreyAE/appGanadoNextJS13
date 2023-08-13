@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import DropDownElement from "./DropDownElement";
 import { herdListOptions, animalListOptions, purchaseListOptions, salesListOptions, incidentListOptions, injectablesListOptions, notificationsListOptions, statisticsListOptions } from '../navigationsOptions'
 import { usePathname } from "next/navigation";
+import NotificationsDropDown from "../userDropDownComponent/NotificationsDropDown";
 
 interface NavbarProps {
     isVisibleProp?: boolean
@@ -51,6 +52,7 @@ export default function Navbar({ isVisibleProp = true }: NavbarProps) {
                                 <DropDownElement collapseNavbar={collapseMenu} listElments={notificationsListOptions} title="Módulo de Notificaciones" />
                                 <DropDownElement collapseNavbar={collapseMenu} listElments={statisticsListOptions} title="Módulo de Estadísticas" />
                                 <DropDownElement collapseNavbar={collapseMenu} listElments={herdListOptions} title="Módulo de Hatos" />
+                                <NotificationsDropDown />
                                 <UserDropDown collapseNavbar={collapseMenu} />
                             </ul>
                         </div>

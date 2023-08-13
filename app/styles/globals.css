@@ -1247,6 +1247,22 @@ footer {
 
 .user-logo {
     width: 70px !important;
+    height: 65px;
+    display: flex;
+    align-items: center;
+}
+
+.user-notification ul{
+    width: 230px !important;
+ }
+
+.user-notification .notification-li{
+   padding: 5px;
+   text-align: center;
+}
+
+.nav-item-custom .notification-bell{
+    font-size: 25px;
 }
 
 #img-logo {
@@ -1254,7 +1270,9 @@ footer {
     width: 50px;
     height: 50px;
     object-fit: contain;
-    margin-right: 20px;
+    background-color: black;
+    margin-right: 10px;
+    margin-left: 10px
 }
 
 .input-group-sm>.form-control,
@@ -1291,6 +1309,14 @@ footer {
     right: 4%;
     cursor: pointer;
     color: lightgray;
+}
+
+.color-red{
+    color: "#aa0000" 
+}
+
+.color-gray{
+   color: "gray" 
 }
 
 .buttons-bar-container {

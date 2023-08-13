@@ -38,12 +38,12 @@ export default function UserDropDown({collapseNavbar}:UserDropDownProps) {
                 </ul>
             </li>
             <li className="nav-item dropdown user-logo" style={avatarStyle}>
-                <div >
+                <Link onClick={collapseNavbar} href="/users/profile">
                     {userContext.avatar ? 
                         <img id="img-logo" src={constants.getUrlApi() + '/api/user/image/' + userContext.avatar} alt="" />
                         :
                         <img id="img-logo" src="/images/logoUser.jpg" alt="" />}
-                </div>
+                </Link>
             </li>
         </>
     )
