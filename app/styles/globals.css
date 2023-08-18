@@ -13,6 +13,16 @@ body {
     margin-bottom: 40px;
 }
 
+.background-login{
+    background-image: url("../assets/images/bulls1.jpeg");
+    height: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center; 
+    background-position-y: 0px;
+    min-height: 1500px;
+}
+
 input[type="number"] {
     -webkit-appearance: textfield !important;
     margin: 0;
@@ -141,7 +151,7 @@ body .container-fluid {
     text-align: center;
     font-size: 70px;
     color: #ffffff !important;
-    font-family: "nevis";
+    font-family: sans-serif, Arial, Helvetica;
     letter-spacing: 4px;
     margin-bottom: 8px;
     text-shadow: 0px 2px 1px #333333;
@@ -150,7 +160,8 @@ body .container-fluid {
 }
 
 #companyName h1 a {
-    color: white
+    color:#57a957;
+    text-decoration: none;
 }
 
 #content #sectionCentral h1 {
@@ -236,36 +247,60 @@ body .container-fluid {
 
 /*Login*/
 #formLogin {
+    color:white;
+    opacity: 0;
     margin: 0px auto;
-    margin-top: 5%;
+    margin-top: 8%;
     margin-bottom: 250px;
-    border: 1px solid rgb(196, 194, 194);
+    border: 1px solid #555e68;
     border-radius: 5px;
-    padding: 20px;
-    padding-left: 50px;
-    padding-right: 50px;
-    background-color: white;
+    background-color:#343a40;
     -webkit-box-shadow: 0px 6px 10px 2px rgba(0, 0, 0, 0.49);
     -moz-box-shadow: 0px 6px 10px 2px rgba(0, 0, 0, 0.49);
     box-shadow: 0px 6px 10px 2px rgba(0, 0, 0, 0.49);
     display: block;
-    transition: all 300ms;
+    transition: all 1000ms;
+    padding: 0;
+    padding-bottom: 20px;
+    animation: login-animation 0.5s linear 0.5s 1 normal forwards;
+    -webkit-animation: login-animation 0.5s linear 0.5s 1 normal forwards;
+    -webkit-transition: all 1000ms;
+    -moz-transition: all 1000ms;
+    -ms-transition: all 1000ms;
+    -o-transition: all 1000ms;
+}
+
+@keyframes login-animation {
+    0%{
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
 #formLogin h2 {
     text-align: center;
-    margin-bottom: 25px;
     display: block;
-    font-size: 25px;
-    color: #70b231;
-    font-family: "nevis";
+    color: #62c462;
     letter-spacing: 1px;
-    margin-top: 10px;
     text-shadow: 0px 1px 1px #333333;
+    background-color: #555e68;
+    width: 100%;
+    padding: 15px;
+    font-size: 26px;
+    margin-bottom: 20px;
+    border: 1px solid #555e68;
+    font-family: sans-serif, Arial, Helvetica;
 }
 
-
+#formLogin #form{
+    padding-left: 20px;
+    padding-right: 20px;
+}
 
 #formLogin .error {
     text-align: center;
@@ -882,10 +917,6 @@ footer {
 }
 
 @media(max-width:1090px) {
-    #formLogin {
-        padding-left: 30px;
-        padding-right: 30px;
-    }
 
     #formLogin h2 {
         font-size: 21px;
@@ -898,11 +929,6 @@ footer {
         color: #529125;
         margin-top: 10px;
         font-size: 18px !important;
-    }
-
-    #formLogin {
-        padding-left: 20px;
-        padding-right: 20px;
     }
 
     .table {
@@ -1440,8 +1466,17 @@ body #container-all {
 }
 
 .sidebar-menu li .side-a-container {
-    margin-left: 35px;
+    display: flex;
+    margin-left: 25px;
 }
+
+.sidebar-menu li .side-a-container i{
+   align-self: center;
+   color: #025bb9;
+}
+.sidebar-menu li .side-a-container a{
+    margin-left: 5px;
+ }
 
 .sidebar-item-title {
     font-weight: 500;

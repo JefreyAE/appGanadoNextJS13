@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 function useValidateJWT(tokenCookie){
     const [token, setToken] = useState(tokenCookie)
-    const [isValid, setIsValid] = useState(true)
+    const [isValid, setIsValid] = useState(false)
     useEffect(()=>{
         if (token) {
             const [header, payload, signature] = token.split('.');
@@ -37,6 +37,9 @@ function validateJWT() {
     if (token) {
         const [header, payload, signature] = token.split('.');
         try {
+            if(!payload){
+                return false;
+            }
             const decodedPayload = JSON.parse(atob(payload));
             const currentTime = Math.floor(Date.now() / 1000); // Obtiene la fecha actual en segundos
 

@@ -2,9 +2,9 @@
 import { deleteCookie } from 'cookies-next'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import Constants from '../../../helpers/constants'
+import Constants from '../../../../helpers/constants'
 import { useContext } from 'react'
-import { UserContext } from '../../../contexts/userContext'
+import { UserContext } from '../../../../contexts/userContext'
 
 interface UserDropDownProps {
     collapseNavbar?: ()=>void 

@@ -1,10 +1,10 @@
 'use client'
 import React, { useEffect, useState, useContext } from 'react'
-import { useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import SpinnerLoading from '../../components/SpinnerLoading'
-import { deleteCookie, setCookie } from 'cookies-next'
+import { deleteCookie, getCookie, setCookie } from 'cookies-next'
 import InputPasswordWithLabel from '../../components/formComponents/InputPasswordWithLabel'
 import UserService from '../../../services/userService'
 import Constants from '../../../helpers/constants'
@@ -12,7 +12,9 @@ import { UserContext } from '../../../contexts/userContext'
 import InputTextWithLabel from '../../components/formComponents/InputTextWithLabel'
 import { validateFormInputs } from '../../../helpers/validationsTool'
 import { ValidationObject } from '../../../types/types'
-import { getUserDataJWT } from '../../../helpers/JWTTools'
+import { getUserDataJWT, validateJWT } from '../../../helpers/JWTTools'
+import InputPassword from '../../components/formComponents/InputPassword'
+import InputText from '../../components/formComponents/InputText'
 
 interface State {
     message: string;
@@ -28,14 +30,16 @@ export default function Login() {
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
 
-    const router = useRouter()
-
     const [state, setState] = useState<State>({
         message: "",
     })
     useEffect(() => {
-        deleteCookie('token')
-        sessionStorage.removeItem('token');
+        if (validateJWT()) {
+            redirect('/main');
+        }else{   
+            deleteCookie('token')
+            sessionStorage.removeItem('token');
+        }     
     }, [])
 
     useEffect(() => {
@@ -45,7 +49,7 @@ export default function Login() {
         password && password !== '' && validateFormInputs(inputs)
     }, [password])
 
-    const loguear = async (e: React.FormEvent) => {
+    const loguear = (e: React.FormEvent) => {
         e.preventDefault();
 
         const inputs: ValidationObject[] = [
@@ -55,19 +59,25 @@ export default function Login() {
         if (validateFormInputs(inputs)) {
             setIsLoading(true);
             try {
-                const data = await _userService.login(email, password);     
-                if (data.status === 'success') {
-                    setCookie('token', JSON.stringify(data.token), { maxAge: constants.getTokenExpirationTime() })
-                    let user = getUserDataJWT(data.token)
-                    updateUser(user)
-                    router.push('/main')          
-                } else {
-                    setIsLoading(false)
-                    setState((prevState) => ({...prevState, message: data.message }))
-                    deleteCookie('token')
-                }
+                _userService.login(email, password)
+                    .then(data =>{
+                        if (data.status === 'success') {
+                            const strToken = JSON.stringify(data.token)
+                            const cookieOptions = {
+                                 SameSite: "none", 
+                                 maxAge: constants.getTokenExpirationTime(), 
+                               };
+                            setCookie('token', strToken, cookieOptions)
+                            let user = getUserDataJWT(data.token)                          
+                            updateUser(user)
+                            window.location.href = '/main';       
+                        } else {
+                            setIsLoading(false)
+                            setState((prevState) => ({...prevState, message: data.message }))
+                            deleteCookie('token')
+                        }
+                    })       
             } catch (error) {
-                console.log(error);
                 setIsLoading(false)
                 toast.error("Ha ocurrido un error al ingresar.", {
                     position: toast.POSITION.TOP_CENTER,
@@ -79,11 +89,11 @@ export default function Login() {
         return (
             <>
                 {!isLoading && <div className="form col-lg-4" id='formLogin'>
-                    <h2>Ingrese sus credenciales</h2>
-                    <form onSubmit={loguear} id="formLog">
+                    <h2>Ingresa tus credenciales</h2>
+                    <form onSubmit={loguear} id="form">
                         <InputTextWithLabel
                             title='Correo Electrónico:'
-                            type='email'
+                            type='text'
                             name='email'
                             placeholder='@'
                             setData={setEmail}

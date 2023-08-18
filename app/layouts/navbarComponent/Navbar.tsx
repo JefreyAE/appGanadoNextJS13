@@ -1,11 +1,11 @@
 'use client'
 import Link from "next/link";
-import UserDropDown from '../userDropDownComponent/UserDropDown';
+import UserDropDown from '../dropDownComponents/userDropDownComponent/UserDropDown';
 import React, { useState } from 'react';
-import DropDownElement from "./DropDownElement";
+import DropDownElement from "../dropDownComponents/DropDownElement";
 import { herdListOptions, animalListOptions, purchaseListOptions, salesListOptions, incidentListOptions, injectablesListOptions, notificationsListOptions, statisticsListOptions } from '../navigationsOptions'
 import { usePathname } from "next/navigation";
-import NotificationsDropDown from "../userDropDownComponent/NotificationsDropDown";
+import NotificationsDropDown from "../dropDownComponents/NotificationsDropDown";
 
 interface NavbarProps {
     isVisibleProp?: boolean

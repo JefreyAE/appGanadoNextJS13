@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ListElements } from "../../../types/types";
+import IconSelector from "./IconSelector";
 
 interface DropDownElementProp {
     title: string
@@ -31,10 +32,10 @@ export default function DropDownSidebar({ title, listElments }: DropDownElementP
                             const handleItemClick = (e:any) => {
                                 e.stopPropagation(); 
                             };
-                            return (
-                                elementList.url && 
+                            return (elementList.url && 
                                 <li className="" key={key}>
                                     <div className="side-a-container">
+                                        <IconSelector iconType={elementList.icon}/>
                                         <Link onClick={handleItemClick} href={elementList.url}>{elementList.description}</Link>
                                     </div>
                                 </li>

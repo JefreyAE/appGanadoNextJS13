@@ -28,7 +28,7 @@ export default function NotificationsDropDown({ collapseNavbar }: NotificationsD
                 </a>
                 <ul className="dropdown-menu" id="user-dropdown-account" aria-labelledby="navbarDropdown">
                     {listIndex && listIndex.length > 0 && listIndex.map((notification: any, index) => (
-                        <>
+                        <div key={index}>
                             <li className='notification-li'>
                                 {notification.notification_type === "Destete" ?
                                     <Link href={`/animals/detail/${notification.code}`}>{notification.notification_type} - {formatDate(notification.notification_date)}</Link> : ""
@@ -38,7 +38,7 @@ export default function NotificationsDropDown({ collapseNavbar }: NotificationsD
                                 }
                             </li>
                             <div className="dropdown-divider"></div>
-                        </>
+                        </div>
                     ))}
                     <li className='notification-li'>
                         <Link href={`/notifications/all/`}>Administrar notificaciones</Link>

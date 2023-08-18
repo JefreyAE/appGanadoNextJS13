@@ -1,32 +1,27 @@
 'use client'
-import { validateJWT, useValidateJWT } from '../helpers/JWTTools'
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation'
-import { getCookie } from 'cookies-next'
+import {  validateJWT } from '../helpers/JWTTools';
 
 const WithPrivateRoute = ({ children }) => {
-
-    const [tokenCookie, setTokenCookie] = useState(`${getCookie('token')}`)
-    const [show, setShow] = useState(false)
     const router = useRouter()
     const pathname = usePathname()
-    const { isValid, setToken } = useValidateJWT(tokenCookie)
+    const [show, setShow] = useState(false)
 
-    useEffect(() => {   
-        setToken(`${getCookie('token')}`)    
+    useEffect(() => {
         if (pathname === '/' || pathname === '/login') {
             setShow(true)
         } else {
             const checkAuth = () => {
-                if (!isValid) {
-                    router.push('/');
+                if (!validateJWT()) {
+                    router.push('/')
                 } else {
                     setShow(true)
                 }
-            }
+            };
             checkAuth()
         }
-    }, [,isValid])
+    }, [pathname])
 
     return show ? <>{children}</> : null
 };

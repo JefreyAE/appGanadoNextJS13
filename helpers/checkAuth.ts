@@ -19,7 +19,13 @@ export function checkAuth(){
             .then(response => response.json())
             .then((data)=>{
                 if(data.status === 'success'){
-                    setCookie('token',  JSON.stringify(data.token), {maxAge: constants.getTokenExpirationTime()});               
+                    const strToken = JSON.stringify(data.token)
+                    const maxAge = constants.getTokenExpirationTime()
+                    const cookieOptions = {
+                        SameSite: "none", 
+                        maxAge: maxAge, 
+                      };
+                    setCookie('token', strToken, cookieOptions)            
                 }
             }).catch(error=>{});
     }

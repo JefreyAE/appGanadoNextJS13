@@ -32,4 +32,5 @@ export interface OptionObject {
 export interface ListElements {
     description: string
     url: string | null
+    icon: string | null
 }
