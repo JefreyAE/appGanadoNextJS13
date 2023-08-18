@@ -36,9 +36,9 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
   return (
     <html lang="en" >
       <head>
-        <link rel="icon" href="favicon/favicon.ico" sizes="any" />
+        <link rel="icon" href="favicon/favicon.ico"></link>
         <Script src="https:cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" crossOrigin="anonymous" defer></Script>
-        <link rel="stylesheet" href="https:cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" crossOrigin="anonymous" as="style" />
+        <link rel="stylesheet" href="https:cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" crossOrigin="anonymous" as="style"></link>
         <link rel="stylesheet" href="https:cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"></link>
         <Script src="https:cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" crossOrigin="anonymous" defer></Script>
       </head>
