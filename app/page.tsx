@@ -1,4 +1,4 @@
-'use client'
+
 import Login from './login/components/Login'
 import Title from './layouts/titleComponent/Title'
 
